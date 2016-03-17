@@ -45,7 +45,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PlayerPaddleController.cs" />
+     <Compile Include="Assets\Scripts\AIPaddle.cs" />
+     <Compile Include="Assets\Scripts\CameraAndScreenSizes.cs" />
+     <Compile Include="Assets\Scripts\PlayerPaddleController.cs" />
+     <Compile Include="Assets\Scripts\PuckController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
