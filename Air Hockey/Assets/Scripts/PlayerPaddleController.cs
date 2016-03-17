@@ -8,11 +8,11 @@ public class PlayerPaddleController : MonoBehaviour {
 	//destination point
 	private Vector3 endPoint;
 	//alter this to change the speed of the movement of player / gameobject
-	public float duration = 50.0f;
+	public float duration = 0.5f;
 	//vertical position of the gameobject
 	private float yAxis;
-	//gliding speed for deceleration
-	public float glide = 0.5f;
+	//Bounce force for puck
+	public float bounceForce = 50.0f;
 
 	void Start(){
 		//save the y axis value of gameobject
@@ -44,14 +44,9 @@ public class PlayerPaddleController : MonoBehaviour {
 				endPoint = hit.point;
 				//as we do not want to change the y axis value based on touch position, reset it to original y axis value
 				endPoint.y = yAxis;
-				Debug.Log (endPoint);
 			}
 
 		} 
-		if (Input.GetMouseButtonUp (0)) {
-			GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity * glide;
-			flag = false;
-		}
 		//check if the flag for movement is true and the current gameobject position is not same as the clicked / tapped position
 		if(flag && !Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)){ //&& !(V3Equal(transform.position, endPoint))){
 			//move the gameobject to the desired position
@@ -60,8 +55,17 @@ public class PlayerPaddleController : MonoBehaviour {
 		//set the movement indicator flag to false if the endPoint and current gameobject position are equal
 		else if(flag && Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)) {
 			flag = false;
-			Debug.Log("I am here");
 		}
 
+	}
+
+	void OnCollisionEnter(Collision hit) {
+		//Debug.Log (hit.gameObject.name + " has been hit");
+		if (hit.gameObject.tag == "Puck") {
+			//Debug.Log ("Puck has been hit");
+			float velX = GetComponent<Rigidbody>().velocity.x;
+			float velZ = GetComponent<Rigidbody>().velocity.z;
+			hit.rigidbody.AddForceAtPosition(new Vector3(velX * bounceForce, 0, velZ * bounceForce), hit.contacts[0].normal, ForceMode.Impulse);
+		}
 	}
 }
