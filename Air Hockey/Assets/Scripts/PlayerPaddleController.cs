@@ -13,6 +13,9 @@ public class PlayerPaddleController : MonoBehaviour {
 	private float yAxis;
 	//Bounce force for puck
 	public float bounceForce = 50.0f;
+	//test
+	public float speed = 0;
+	Vector3 lastPosition = Vector3.zero;
 
 	void Start(){
 		//save the y axis value of gameobject
@@ -21,7 +24,8 @@ public class PlayerPaddleController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-
+		speed = (transform.position - lastPosition).magnitude;
+		lastPosition = transform.position;
 		//check if the screen is touched / clicked   
 		if ((Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) || (Input.GetMouseButton (0))) {
 			//declare a variable of RaycastHit struct
@@ -45,7 +49,6 @@ public class PlayerPaddleController : MonoBehaviour {
 				//as we do not want to change the y axis value based on touch position, reset it to original y axis value
 				endPoint.y = yAxis;
 			}
-
 		} 
 		//check if the flag for movement is true and the current gameobject position is not same as the clicked / tapped position
 		if(flag && !Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)){ //&& !(V3Equal(transform.position, endPoint))){
@@ -57,11 +60,18 @@ public class PlayerPaddleController : MonoBehaviour {
 			flag = false;
 		}
 
+		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > 0) {
+			float z = 0 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.x);
+			transform.position = new Vector3 (transform.position.x, transform.position.y, z);
+		}
+
 	}
 
 	void OnCollisionEnter(Collision hit) {
-		if (hit.gameObject.tag == "Puck") {
-			hit.rigidbody.AddForceAtPosition(-1 * hit.contacts[0].normal * bounceForce, hit.contacts[0].normal, ForceMode.Impulse);
+		if (hit.gameObject.tag == "Puck" && speed > 0.7) {
+			hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * (speed * bounceForce), hit.contacts [0].normal, ForceMode.Impulse);
+		} else {
+			hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
 		}
 	}
 

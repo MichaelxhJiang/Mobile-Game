@@ -2,11 +2,16 @@
 using System.Collections;
 
 public class LimitSpeed : MonoBehaviour {
-
+	//test
+	public float speed;
+	Vector3 lastPosition = Vector3.zero;
 	public float maxSpeed = 200f;//Replace with your max speed
+
 	void FixedUpdate()
 	{
-		if(GetComponent<Rigidbody>().velocity.magnitude > maxSpeed)
+		speed = (transform.position - lastPosition).magnitude;
+		lastPosition = transform.position;
+		if(speed > maxSpeed)
 		{
 			GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
 		}
