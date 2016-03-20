@@ -6,8 +6,6 @@ public class AIPaddle : MonoBehaviour {
 	public float speed = 0.7f;
 	//destination point
 	private Vector3 endPoint;
-	//alter this to change the speed of the movement of player / gameobject
-	public float duration = 0.5f;
 	//Bounce force for puck
 	public float bounceForce = 50.0f;
 	//The puck game object
@@ -34,15 +32,13 @@ public class AIPaddle : MonoBehaviour {
 
 	void OnCollisionEnter(Collision hit) {
 		if (hit.gameObject.tag == "Puck") {
+			hit.rigidbody.AddForceAtPosition(-1 * hit.contacts[0].normal * bounceForce, hit.contacts[0].normal, ForceMode.Impulse);
 			hitPuck = true;
-			float velX = GetComponent<Rigidbody>().velocity.x + 1;
-			float velZ = GetComponent<Rigidbody>().velocity.z + 1;
-			hit.rigidbody.AddForceAtPosition(new Vector3(velX * bounceForce, 0, velZ * bounceForce), hit.contacts[0].normal, ForceMode.Impulse);
 		}
 	}
 	void OnCollisionStay(Collision hit){
 		hitPuck = true;
-		Debug.Log ("Glitch");
+		//Debug.Log ("Glitch");
 	}
 
 	IEnumerator WaitToChasePuck () {
