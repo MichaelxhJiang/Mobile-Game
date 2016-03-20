@@ -60,12 +60,12 @@ public class PlayerPaddleController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision hit) {
-		//Debug.Log (hit.gameObject.name + " has been hit");
 		if (hit.gameObject.tag == "Puck") {
-			//Debug.Log ("Puck has been hit");
-			float velX = GetComponent<Rigidbody>().velocity.x;
-			float velZ = GetComponent<Rigidbody>().velocity.z;
-			hit.rigidbody.AddForceAtPosition(new Vector3(velX * bounceForce, 0, velZ * bounceForce), hit.contacts[0].normal, ForceMode.Impulse);
+			hit.rigidbody.AddForceAtPosition(-1 * hit.contacts[0].normal * bounceForce, hit.contacts[0].normal, ForceMode.Impulse);
 		}
+	}
+
+	void OnCollisionStay(Collision hit) {
+		OnCollisionEnter (hit);
 	}
 }
