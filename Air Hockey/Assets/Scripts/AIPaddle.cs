@@ -3,7 +3,7 @@ using System.Collections;
 
 public class AIPaddle : MonoBehaviour {
 	//Speed of AI paddle
-	public float speed = 0.7f;
+	public float speed = 0.25f;
 	//destination point
 	private Vector3 endPoint;
 	//Bounce force for puck
@@ -17,16 +17,25 @@ public class AIPaddle : MonoBehaviour {
 
 	void Start () {
 		hitPuck = false;
-		waitTime = 0.5f;
+		waitTime = 0.2f;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		if (hitPuck) {
-			transform.position = Vector3.MoveTowards (transform.position, targ.transform.position, -speed * 0.5f);
-			StartCoroutine (WaitToChasePuck());
-		} else {
+		if (targ.transform.position.z < 0) {
+			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x, targ.transform.position.y, 30), speed);
+		} else if (hitPuck) {
+			transform.position = Vector3.MoveTowards (transform.position, targ.transform.position, -speed);
+			StartCoroutine (WaitToChasePuck ());
+		} else if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > targ.transform.position.z + (targ.transform.localScale.z*0.1f)) {
 			transform.position = Vector3.MoveTowards (transform.position, targ.transform.position, speed);
+		} else {
+			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x * 0.5f, targ.transform.position.y, targ.transform.position.z + (targ.transform.localScale.z*1.0f)), speed);
+		}
+
+		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) < 0) {
+			float z = 0 + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x);
+			transform.position = new Vector3 (transform.position.x, transform.position.y, z);
 		}
 	}
 

@@ -10,7 +10,6 @@ public class WallPhysics : MonoBehaviour {
 			float velZ = hit.rigidbody.velocity.z;
 			//Reduce speed by adding force opposite to the direction of puck
 			hit.rigidbody.AddForce(new Vector3(-velX * reducePuckSpeed, 0.0f, -velZ * reducePuckSpeed));
-			Debug.Log ("puck hit wall");
 		}
 	}
 }
