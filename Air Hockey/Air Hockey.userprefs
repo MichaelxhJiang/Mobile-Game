@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\AIPaddle.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AIPaddle.cs">
     <Files>
-      <File FileName="Assets\Scripts\LimitSpeed.cs" Line="12" Column="4" />
-      <File FileName="Assets\Scripts\AIPaddle.cs" Line="36" Column="19" />
-      <File FileName="Assets\Scripts\CameraAndScreenSizes.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\PlayerPaddleController.cs" Line="61" Column="2" />
-      <File FileName="Assets\Scripts\WallPhysics.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DontGoThroughThings.js" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/PlayerPaddleController.cs" Line="15" Column="30" />
+      <File FileName="Assets/Scripts/AIPaddle.cs" Line="34" Column="144" />
+      <File FileName="Assets/Scripts/LimitSpeed.cs" Line="6" Column="20" />
+      <File FileName="Assets/Scripts/DontGoThroughThings.js" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/WallPhysics.cs" Line="12" Column="96" />
+      <File FileName="Assets/Scripts/Score.cs" Line="33" Column="32" />
+      <File FileName="Assets/Scripts/ScoreVariables.cs" Line="8" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
