@@ -28,7 +28,6 @@ public class AIPaddle : MonoBehaviour {
 		if (targ.transform.position.z < 0) {
 			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x, targ.transform.position.y, 30), speed);
 		} else if (hitPuck) {
-			transform.position = Vector3.MoveTowards (transform.position, targ.transform.position, -speed);
 			StartCoroutine (WaitToChasePuck (0.2f));
 		} else if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > targ.transform.position.z + (targ.transform.localScale.z*1f)) {
 			float dis = Mathf.Sqrt (Mathf.Abs((transform.position.x - targ.transform.position.x) + (transform.position.z - targ.transform.position.z)));
