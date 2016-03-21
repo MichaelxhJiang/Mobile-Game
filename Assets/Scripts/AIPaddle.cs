@@ -29,14 +29,14 @@ public class AIPaddle : MonoBehaviour {
 			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x, targ.transform.position.y, 30), speed);
 		} else if (hitPuck) {
 			StartCoroutine (WaitToChasePuck (0.2f));
-		} else if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > targ.transform.position.z + (targ.transform.localScale.z*1f)) {
+		} else if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > targ.transform.position.z + (targ.transform.localScale.z*1.5f)) {
 			float dis = Mathf.Sqrt (Mathf.Abs((transform.position.x - targ.transform.position.x) + (transform.position.z - targ.transform.position.z)));
 			if (dis < 5) 
 				transform.position = Vector3.MoveTowards (transform.position, targ.transform.position, speed + ((5-dis)/4));
 			else
 				transform.position = Vector3.MoveTowards (transform.position, targ.transform.position, speed);
 		} else {
-			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x * 0.5f, targ.transform.position.y, targ.transform.position.z + (targ.transform.localScale.z*1.0f)), speed);
+			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x * 0.5f, targ.transform.position.y, targ.transform.position.z + (targ.transform.localScale.z*1.5f)), speed);
 		}
 
 		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) < 0) {
