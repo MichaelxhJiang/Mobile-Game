@@ -12,7 +12,7 @@ public class PlayerPaddleController : MonoBehaviour {
 	//vertical position of the gameobject
 	private float yAxis;
 	//Bounce force for puck
-	public float bounceForce = 50.0f;
+	public float bounceForce = 40.0f;
 	//test
 	public float speed = 0;
 	Vector3 lastPosition = Vector3.zero;
