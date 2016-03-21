@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\CameraAndScreenSizes.cs" />
      <Compile Include="Assets\Scripts\LimitSpeed.cs" />
      <Compile Include="Assets\Scripts\PlayerPaddleController.cs" />
+     <Compile Include="Assets\Scripts\Score.cs" />
+     <Compile Include="Assets\Scripts\ScoreVariables.cs" />
      <Compile Include="Assets\Scripts\WallPhysics.cs" />
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
