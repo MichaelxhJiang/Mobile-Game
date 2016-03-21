@@ -30,7 +30,7 @@ public class Score : MonoBehaviour {
 			AI.GetComponent<AIPaddle> ().enabled = true;
 			player.GetComponent<PlayerPaddleController> ().enabled = true;
 		}
-		if (transform.position.z > 38) {
+		if (transform.position.z > 37) {
 			sv.increasePlayerScore ();
 			transform.position = new Vector3 (0f, 0.5f, 0f);
 			rb.velocity = Vector3.zero;
