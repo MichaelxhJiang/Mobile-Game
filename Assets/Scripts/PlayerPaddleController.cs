@@ -59,12 +59,12 @@ public class PlayerPaddleController : MonoBehaviour {
 		else if(flag && Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)) {
 			flag = false;
 		}
-
-		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > 0) {
-			float z = 0 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.x);
+		transform.position = new Vector3 (Mathf.Clamp(transform.position.x,-18.8f,18.8f), transform.position.y, transform.position.z);
+		//this code constrains the paddle from moving off the screen
+		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.z) > 0) {
+			float z = 0 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.z);
 			transform.position = new Vector3 (transform.position.x, transform.position.y, z);
 		}
-
 	}
 
 	void OnCollisionEnter(Collision hit) {
