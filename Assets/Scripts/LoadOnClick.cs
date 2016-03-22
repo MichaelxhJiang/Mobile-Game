@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-//using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 public class LoadOnClick : MonoBehaviour {
-	public void LoadScene(string scene) {
-		//SceneManager.LoadScene (scene);
+	public void LoadScene(int scene) {
+		SceneManager.LoadScene (scene);
 	}
 }
