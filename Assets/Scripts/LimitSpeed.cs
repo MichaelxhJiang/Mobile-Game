@@ -5,7 +5,7 @@ public class LimitSpeed : MonoBehaviour {
 	//test
 	public float speed;
 	Vector3 lastPosition = Vector3.zero;
-	public float maxSpeed = 200f;//Replace with your max speed
+	public float maxSpeed = 5f;//Replace with your max speed
 
 	void FixedUpdate()
 	{
