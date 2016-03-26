@@ -45,6 +45,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\2 player scene\Player1.cs" />
+     <Compile Include="Assets\Scripts\2 player scene\Player2.cs" />
+     <Compile Include="Assets\Scripts\2 player scene\TwoPlayerScoreVariables.cs" />
+     <Compile Include="Assets\Scripts\2 player scene\TwoPlayerScoring.cs" />
      <Compile Include="Assets\Scripts\AIPaddle.cs" />
      <Compile Include="Assets\Scripts\CameraAndScreenSizes.cs" />
      <Compile Include="Assets\Scripts\LimitSpeed.cs" />

@@ -9,16 +9,6 @@ public class ScoreVariables : MonoBehaviour {
 		GUI.Box(new Rect(0, 30, 200, 30), "Player:" + playerScore);
 		GUI.Box(new Rect(0, 60, 200, 30), "AI:" + AIScore);
 	}
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void increasePlayerScore(){
 		playerScore++;
 	}
