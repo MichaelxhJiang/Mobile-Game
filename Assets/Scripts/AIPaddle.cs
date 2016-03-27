@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class AIPaddle : MonoBehaviour {
+	public AudioClip hitSound;
 	//Speed of AI paddle
 	public float speed = 0.5f;
 	//destination point
@@ -14,8 +15,16 @@ public class AIPaddle : MonoBehaviour {
 	private bool hitPuck;
 	//How long the AI needs to wait before chasing puck again
 
+	private AudioSource source;
+	private float volHigh = 1f;
+	private float volLow = .5f;
+
 	public float actualspeed = 0;
 	Vector3 lastPosition = Vector3.zero;
+
+	void Awake(){
+		source = GetComponent<AudioSource> ();
+	}
 
 	void Start () {
 		hitPuck = false;
@@ -53,7 +62,9 @@ public class AIPaddle : MonoBehaviour {
 	}
 
 	void OnCollisionStay(Collision hit){
+		float vol = Random.Range (volLow, volHigh);
 		hitPuck = true;
+		source.PlayOneShot (hitSound, vol);
 		//Debug.Log ("Glitch");
 	}
 

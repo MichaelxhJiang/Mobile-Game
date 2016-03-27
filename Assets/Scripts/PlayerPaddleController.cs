@@ -15,7 +15,20 @@ public class PlayerPaddleController : MonoBehaviour {
 	public float bounceForce = 40.0f;
 	//test
 	public float speed = 0;
+
+	public AudioClip hitSound;
+
+	private AudioSource source;
+
+	private float volHigh = 1f;
+
+	private float volLow = .5f;
+
 	Vector3 lastPosition = Vector3.zero;
+
+	void Awake(){
+		source = GetComponent<AudioSource> ();
+	}
 
 	void Start(){
 		//save the y axis value of gameobject
@@ -76,6 +89,8 @@ public class PlayerPaddleController : MonoBehaviour {
 	}
 
 	void OnCollisionStay(Collision hit) {
+		float vol = Random.Range (volLow, volHigh);
 		OnCollisionEnter (hit);
+		source.PlayOneShot(hitSound,vol);
 	}
 }
