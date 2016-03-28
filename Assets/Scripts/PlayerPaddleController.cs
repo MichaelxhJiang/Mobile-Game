@@ -12,7 +12,7 @@ public class PlayerPaddleController : MonoBehaviour {
 	//vertical position of the gameobject
 	private float yAxis;
 	//Bounce force for puck
-	public float bounceForce = 40.0f;
+	public float bounceForce = 50.0f;
 	//test
 	public float speed = 0;
 
@@ -83,14 +83,16 @@ public class PlayerPaddleController : MonoBehaviour {
 	void OnCollisionEnter(Collision hit) {
 		if (hit.gameObject.tag == "Puck" && speed > 0.7) {
 			hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * (speed * bounceForce), hit.contacts [0].normal, ForceMode.Impulse);
+			float vol = Random.Range (volLow, volHigh);
+			source.PlayOneShot(hitSound,vol);
 		} else {
 			hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
 		}
 	}
 
 	void OnCollisionStay(Collision hit) {
-		float vol = Random.Range (volLow, volHigh);
+		
 		OnCollisionEnter (hit);
-		source.PlayOneShot(hitSound,vol);
 	}
+		
 }
