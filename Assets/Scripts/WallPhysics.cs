@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class WallPhysics : MonoBehaviour {
-	public float reducePuckSpeed = 0.3f;
+	private float reducePuckSpeed = 0f;
 
 	void OnCollisionEnter(Collision hit) {
 		if (hit.gameObject.tag == "Puck") {

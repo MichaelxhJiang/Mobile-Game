@@ -26,7 +26,10 @@ public class AIPaddle : MonoBehaviour {
 		actualspeed = (transform.position - lastPosition).magnitude;
 		lastPosition = transform.position;
 		if (targ.transform.position.z < 0) {
-			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x, targ.transform.position.y, 30), speed);
+			if (targ.GetComponent<LimitSpeed>().speed < 0.3f) 
+				transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x, targ.transform.position.y, 30), speed/1.5f);
+			else
+				transform.position = Vector3.MoveTowards (transform.position, new Vector3 (targ.transform.position.x, targ.transform.position.y, 20), speed/1.5f);
 		} else if (hitPuck) {
 			StartCoroutine (WaitToChasePuck (0.2f));
 		} else if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > targ.transform.position.z + (targ.transform.localScale.z*1.5f)) {

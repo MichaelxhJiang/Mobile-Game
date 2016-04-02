@@ -6,8 +6,10 @@ public class Score : MonoBehaviour {
 	private GameObject player;
 	private ScoreVariables sv;
 	private Rigidbody rb;
-	public int countDown = 3;
+	public int countDown = 1;
 	private double timer;
+
+	public AudioClip[] audio;
 
 	//Set up timer UI
 	void OnGUI(){
@@ -20,7 +22,6 @@ public class Score : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		AI = GameObject.FindGameObjectWithTag ("AI");
 		player = GameObject.FindGameObjectWithTag ("Player");
-		timer = countDown;
 		//Start the count down
 		CountDown ();
 	}
@@ -28,7 +29,7 @@ public class Score : MonoBehaviour {
 	void CountDown () {
 		AI.GetComponent<AIPaddle> ().enabled = false;
 		player.GetComponent<PlayerPaddleController> ().enabled = false;
-		StartCoroutine(waitForSeconds());
+		StartCoroutine(waitForSeconds(1f));
 
 	}
 	//Resets the positions of game objects
@@ -38,6 +39,7 @@ public class Score : MonoBehaviour {
 		rb.velocity = Vector3.zero;
 		AI.transform.position = new Vector3 (0, 1, 30);
 		player.transform.position = new Vector3 (0, 1, -30);
+		timer = 1;
 		CountDown ();
 	}
 
@@ -53,13 +55,11 @@ public class Score : MonoBehaviour {
 	}
 
 	//Starts a countdown before the game begins
-	IEnumerator waitForSeconds () {
-		for (int i = countDown; i >=0; i--) {
-			yield return new WaitForSeconds (1);
-			timer = i * 1.0;
-		}
+	IEnumerator waitForSeconds (float waitTime) {
+		yield return new WaitForSeconds (waitTime);
 		AI.GetComponent<AIPaddle> ().enabled = true;
 		player.GetComponent<PlayerPaddleController> ().enabled = true;
+		timer = 0;
 	}
 }
 
