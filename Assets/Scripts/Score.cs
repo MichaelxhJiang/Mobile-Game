@@ -14,7 +14,7 @@ public class Score : MonoBehaviour {
 		GUI.Box(new Rect(Screen.width - 70, 0, 70, 30), ""+timer);
 	}
 
-	void Start () {
+	void Awake () {
 		//Get all the reference objects needed
 		sv = GameObject.FindGameObjectWithTag ("GameManager").GetComponent<ScoreVariables> ();
 		rb = GetComponent<Rigidbody> ();
