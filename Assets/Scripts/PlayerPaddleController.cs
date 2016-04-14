@@ -36,7 +36,7 @@ public class PlayerPaddleController : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		speed = (transform.position - lastPosition).magnitude;
 		lastPosition = transform.position;
 		//check if the screen is touched / clicked   
@@ -72,11 +72,27 @@ public class PlayerPaddleController : MonoBehaviour {
 		else if(flag && Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)) {
 			flag = false;
 		}
-		transform.position = new Vector3 (Mathf.Clamp(transform.position.x,-18.8f,18.8f), transform.position.y, transform.position.z);
-		//this code constrains the paddle from moving off the screen
+		//following code constrains the paddle from moving off the screen
+
+		//Clamps half court
 		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.z) > 0) {
 			float z = 0 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.z);
 			transform.position = new Vector3 (transform.position.x, transform.position.y, z);
+		}
+		//Clamps bottom
+		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.z) < -31) {
+			float z = -31 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.z);
+			transform.position = new Vector3 (transform.position.x, transform.position.y, z);
+		}
+		//Clamps left
+		if (transform.position.x + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) < -16) {
+			float x = -16 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.x);
+			transform.position = new Vector3 (x, transform.position.y, transform.position.z);
+		}
+		//Clamps right
+		if (transform.position.x + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > 22) {
+			float x = 22 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.x);
+			transform.position = new Vector3 (x, transform.position.y, transform.position.z);
 		}
 	}
 
