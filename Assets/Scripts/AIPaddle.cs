@@ -28,7 +28,7 @@ public class AIPaddle : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		float translation = speed * Time.deltaTime;
 
 		if (targ.transform.position.z < 0) {//if the puck is on the other side
