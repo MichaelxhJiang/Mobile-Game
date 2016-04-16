@@ -12,16 +12,21 @@ public class RotateLight : MonoBehaviour {
 		} else {
 			rotation = -1;
 		}
-
-		if (Random.Range (0.0f, 1.0f) < 0.5f) {
-			gameObject.GetComponent<Light>().color = Color.blue;
+		float rand = Random.Range (0.0f, 1.0f);
+		if (rand < 0.25f) {
+			gameObject.GetComponent<Light> ().color = Color.blue;
+		} else if (rand < 0.5) {
+			gameObject.GetComponent<Light> ().color = Color.red;
+		} else if (rand < 0.75) {
+			gameObject.GetComponent<Light> ().color = Color.yellow;
 		} else {
-			gameObject.GetComponent<Light>().color = Color.red;
+			gameObject.GetComponent<Light> ().color = Color.white;
 		}
 
-		rotateSpeed = 50 * Random.Range (1.0f, 3.0f);
-		moveSpeed = 10 * Random.Range (0.5f, 2.0f);
-		gameObject.GetComponent<Light>().range = Random.Range (8.0f, 16.0f);
+		rotateSpeed = 70 * Random.Range (1.0f, 3.0f);
+		moveSpeed = 15 * Random.Range (0.5f, 2.0f);
+		gameObject.GetComponent<Light>().range = Random.Range (6.0f, 12.0f);
+		gameObject.GetComponent<Light> ().range = Random.Range (4.0f, 6.0f);
 	}
 
 	// Update is called once per frame
