@@ -64,7 +64,7 @@ public class Player1 : MonoBehaviour {
 		for (int i = 0; i < Input.touchCount && flag == false; i++) {
 			Debug.Log (myTouches[i].position.x + ", " + myTouches[i].position.y);
 			//check if the screen is touched / clicked   
-			if (myTouches[i].phase == TouchPhase.Began || (Input.GetMouseButton (0))) {
+			if (myTouches[i].phase == TouchPhase.Began) {
 				//declare a variable of RaycastHit struct
 				RaycastHit hit;
 				//Create a Ray on the tapped / clicked position
