@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\2 player scene\TwoPlayerScoring.cs" />
      <Compile Include="Assets\Scripts\AIPaddle.cs" />
      <Compile Include="Assets\Scripts\CameraAndScreenSizes.cs" />
+     <Compile Include="Assets\Scripts\GameStates.cs" />
      <Compile Include="Assets\Scripts\Light Effects\FollowPuck.cs" />
      <Compile Include="Assets\Scripts\Light Effects\RotateLight.cs" />
      <Compile Include="Assets\Scripts\Light Effects\SpotLightEffect.cs" />
