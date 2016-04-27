@@ -5,14 +5,16 @@ public class TwoPlayerScoring : MonoBehaviour {
 
 	private GameObject player2;
 	private GameObject player1;
+	public GameObject gm;
 	private TwoPlayerScoreVariables sv;
 	private Rigidbody rb;
-	public int countDown = 3;
+	public int countDown = 1;
 	private double timer;
 
 	//Set up timer UI
 	void OnGUI(){
-		GUI.Box(new Rect(Screen.width - 70, 0, 70, 30), ""+timer);
+		GUI.skin.box.fontSize = Screen.height/30;
+		GUI.Box(new Rect(Screen.width - Screen.width/3, 0, Screen.width/3, Screen.height/20), ""+timer);
 	}
 
 	void Start () {
@@ -21,14 +23,14 @@ public class TwoPlayerScoring : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		player2 = GameObject.FindGameObjectWithTag ("Player 2");
 		player1 = GameObject.FindGameObjectWithTag ("Player 1");
+		gm = GameObject.FindGameObjectWithTag ("Two Player Game Manager");
 		timer = countDown;
 		//Start the count down
 		CountDown ();
 	}
 	//Count down starts coroutine which invokes the waitForSeconds method
 	void CountDown () {
-		player2.GetComponent<Player2> ().enabled = false;
-		player1.GetComponent<Player1> ().enabled = false;
+		gm.GetComponent<Better2playercontroller> ().enabled = false;
 		StartCoroutine(waitForSeconds());
 
 	}
@@ -59,7 +61,6 @@ public class TwoPlayerScoring : MonoBehaviour {
 			yield return new WaitForSeconds (1);
 			timer = i * 1.0;
 		}
-		player2.GetComponent<Player2> ().enabled = true;
-		player1.GetComponent<Player1> ().enabled = true;
+		gm.GetComponent<Better2playercontroller> ().enabled = true;
 	}
 }

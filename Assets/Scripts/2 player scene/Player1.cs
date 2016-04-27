@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+/*
 public class Player1 : MonoBehaviour {
 	//flag to check if the user has tapped / clicked. 
 	//Set to true on click. Reset to false on reaching destination
@@ -30,7 +30,7 @@ public class Player1 : MonoBehaviour {
 
 		/**
 		 * FOR UNITY MOUSE CONTROL ONLY
-		 **/
+		 
 		//check if the screen is touched / clicked   
 		if ((Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) || (Input.GetMouseButton (0))) {
 			//declare a variable of RaycastHit struct
@@ -127,7 +127,7 @@ public class Player1 : MonoBehaviour {
 			float x = 22 - (GetComponent<CapsuleCollider> ().radius * transform.localScale.x);
 			transform.position = new Vector3 (x, transform.position.y, transform.position.z);
 		}
-		**/
+		**
 	}
 
 	void OnCollisionEnter(Collision hit) {
@@ -142,3 +142,4 @@ public class Player1 : MonoBehaviour {
 		OnCollisionEnter (hit);
 	}
 }
+*/

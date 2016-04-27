@@ -12,6 +12,7 @@ public class ScoreVariables : MonoBehaviour {
 
 	void Start(){
 		nameToUse = rand.Next (0, nameArray.Length);
+		nameArray = new string[]{"Bill is the OG"};
 	}
 	void OnGUI(){
 		GUI.Box(new Rect(0, 0, 200, 30), "Score");

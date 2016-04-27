@@ -5,7 +5,6 @@ public class Player2 : MonoBehaviour {
 
 	//flag to check if the user has tapped / clicked. 
 	//Set to true on click. Reset to false on reaching destination
-	private bool flag = false;
 	//destination point
 	private Vector3 endPoint;
 	//alter this to change the speed of the movement of player / gameobject
@@ -51,7 +50,6 @@ public class Player2 : MonoBehaviour {
 				//Check if the contact is within the player 2 paddle's boundaries
 				if (hit.point.z > 0.5f) {
 					//set a flag to indicate to move the gameobject
-					flag = true;
 					//save the click / tap position
 					endPoint = hit.point;
 					//as we do not want to change the y axis value based on touch position, reset it to original y axis value
@@ -62,7 +60,7 @@ public class Player2 : MonoBehaviour {
 
 
 		Touch[] myTouches = Input.touches;
-		for (int i = 0; i < Input.touchCount && flag == false; i++) {
+		for (int i = 0; i < Input.touchCount; i++) {
 			Debug.Log (myTouches[i].position.x + ", " + myTouches[i].position.y);
 			//check if the screen is touched / clicked   
 			if (myTouches[i].phase == TouchPhase.Began || (Input.GetMouseButton (0))) {
@@ -84,7 +82,6 @@ public class Player2 : MonoBehaviour {
 					//Check if the contact is within the player 1 paddle's boundaries
 					if (hit.point.z > 0.5f) {
 						//set a flag to indicate to move the gameobject
-						flag = true;
 						//save the click / tap position
 						endPoint = hit.point;
 						//as we do not want to change the y axis value based on touch position, reset it to original y axis value
@@ -96,14 +93,11 @@ public class Player2 : MonoBehaviour {
 
 
 		//check if the flag for movement is true and the current gameobject position is not same as the clicked / tapped position
-		if(flag && !Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)){ //&& !(V3Equal(transform.position, endPoint))){
+		if(!Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)){ //&& !(V3Equal(transform.position, endPoint))){
 			//move the gameobject to the desired position
 			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, endPoint, 1/(duration*(Vector3.Distance(gameObject.transform.position, endPoint))));
 		}
 		//set the movement indicator flag to false if the endPoint and current gameobject position are equal
-		else if(flag && Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)) {
-			flag = false;
-		}
 		transform.position = new Vector3 (Mathf.Clamp(transform.position.x,-18.8f,18.8f), transform.position.y, transform.position.z);
 		//this code constraints the paddle from moving off the screen
 		if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.z) < 0.5f) {
