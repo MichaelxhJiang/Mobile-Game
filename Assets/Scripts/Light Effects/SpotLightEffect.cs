@@ -6,10 +6,11 @@ public class SpotLightEffect : MonoBehaviour {
 	public GameObject puckLight;
 	// Use this for initialization
 	void Start () {
+		GameObject spotlight = GameObject.FindGameObjectWithTag ("Main Light");
 		if (GameStates.partyLights) {
+			spotlight.GetComponent <Light> ().intensity = 4;
 			createLights ();
 		} else {
-			GameObject spotlight = GameObject.FindGameObjectWithTag ("Main Light");
 			spotlight.GetComponent <Light> ().intensity = 6;
 		}
 	}
