@@ -4,16 +4,15 @@ using System.Collections;
 public class AIPaddle : MonoBehaviour {
 	public AudioClip hitSound;
 	//Speed of AI paddle when returning to position
-	public float speed = 10;
+	public float speed ;
 	//destination point
 	private Vector3 endPoint;
 	//Bounce force for puck
-	public float bounceForce = 10.0f;
+	private float bounceForce;
 	//The puck game object
 	public GameObject targ;
 	//check if AI just recently touched the puck
 	private bool hitPuck;
-	//How long the AI needs to wait before chasing puck again
 
 	private AudioSource source;
 	private float volHigh = 1f;
@@ -25,6 +24,8 @@ public class AIPaddle : MonoBehaviour {
 
 	void Start () {
 		hitPuck = false;
+		speed = GameStates.AIspeed;
+		bounceForce = GameStates.AIbounceforce;
 	}
 
 	// Update is called once per frame
