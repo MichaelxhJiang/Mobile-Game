@@ -33,7 +33,6 @@ public class Score : MonoBehaviour {
 	}
 	//Resets the positions of game objects
 	void resetPositions() {
-		Debug.Log ("reset positions");
 		transform.position = new Vector3 (0f, 0.5f, 0f);
 		rb.velocity = Vector3.zero;
 		AI.transform.position = new Vector3 (0, 1, 30);
