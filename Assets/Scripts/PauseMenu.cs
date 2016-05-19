@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 	public bool paused;
-	public float temp;
+
 	void OnGUI(){
 		GUI.skin.box.fontSize = Screen.height/30;
 		if (!paused) {
@@ -16,7 +17,7 @@ public class PauseMenu : MonoBehaviour {
 			}
 			if (GUI.Button (new Rect (0 + Screen.width / 6, 0 + Screen.width / 6, Screen.width / 1.5f, Screen.height / 1.5f), "Back to main menu")) {
 				PauseGame ();
-				Application.LoadLevel ("Title Screen"); 
+				SceneManager.LoadScene (0); 
 			}
 		}
 			
@@ -36,10 +37,5 @@ public class PauseMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		paused = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

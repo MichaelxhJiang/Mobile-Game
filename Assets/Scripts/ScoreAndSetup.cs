@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Score : MonoBehaviour {
+public class ScoreAndSetup : MonoBehaviour {
 	private GameObject AI;
 	private GameObject player;
 	private ScoreVariables sv;
 	private Rigidbody rb;
 	public int countDown = 3;
+	//public GameObject puck;
 	private double timer;
+
 
 	//Set up timer UI
 	void OnGUI(){
@@ -21,6 +23,10 @@ public class Score : MonoBehaviour {
 		AI = GameObject.FindGameObjectWithTag ("AI");
 		player = GameObject.FindGameObjectWithTag ("Player");
 		timer = countDown;
+
+		//Instantiate the puck
+		//Instantiate (puck, new Vector3 (0.0f, 0.5f, 0.0f), puck.transform.rotation);
+
 		//Start the count down
 		CountDown ();
 	}

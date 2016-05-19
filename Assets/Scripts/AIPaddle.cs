@@ -10,7 +10,7 @@ public class AIPaddle : MonoBehaviour {
 	//Bounce force for puck
 	private float bounceForce;
 	//The puck game object
-	public GameObject targ;
+	private GameObject targ;
 	//The player net game object
 	public GameObject playerNet;
 	//check if AI just recently touched the puck
@@ -28,6 +28,7 @@ public class AIPaddle : MonoBehaviour {
 		hitPuck = false;
 		speed = GameStates.AIspeed;
 		bounceForce = GameStates.AIbounceforce;
+		targ = GameObject.Find ("Puck");
 	}
 
 	// Update is called once per frame

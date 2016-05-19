@@ -7,6 +7,7 @@ public class GameStates : MonoBehaviour {
 	public static bool partyLights = false;
 	public static float AIspeed = 0;
 	public static float AIbounceforce =  0;
+	public static string characterSelection = "";
 
 	public void easyAI () {
 		AIspeed = 40;
@@ -28,5 +29,13 @@ public class GameStates : MonoBehaviour {
 		AIbounceforce = 50;
 		//Do some super cool AI algorithm 
 		//to be implemented
+	}
+
+	public void timeWarper () {
+		characterSelection = "Time Warper";
+	}
+
+	public void cloner () {
+		characterSelection = "Cloner";
 	}
 }

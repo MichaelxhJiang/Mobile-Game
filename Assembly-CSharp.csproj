@@ -47,7 +47,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\2 player scene\Better2playercontroller.cs" />
      <Compile Include="Assets\Scripts\2 player scene\HittingPuck.cs" />
-     <Compile Include="Assets\Scripts\2 player scene\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\2 player scene\Player1.cs" />
      <Compile Include="Assets\Scripts\2 player scene\Player2.cs" />
      <Compile Include="Assets\Scripts\2 player scene\TwoPlayerController.cs" />
@@ -63,9 +62,10 @@
      <Compile Include="Assets\Scripts\LoadOnClick.cs" />
      <Compile Include="Assets\Scripts\MouseHover.cs" />
      <Compile Include="Assets\Scripts\PartyLightsToggle.cs" />
-     <Compile Include="Assets\Scripts\Pause.cs" />
+     <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerPaddleController.cs" />
-     <Compile Include="Assets\Scripts\Score.cs" />
+     <Compile Include="Assets\Scripts\PowerUp.cs" />
+     <Compile Include="Assets\Scripts\ScoreAndSetup.cs" />
      <Compile Include="Assets\Scripts\ScoreVariables.cs" />
      <Compile Include="Assets\Scripts\WallPhysics.cs" />
  <Reference Include="UnityEngine.UI">
