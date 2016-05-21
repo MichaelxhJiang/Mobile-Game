@@ -18,7 +18,7 @@ public class SpotLightEffect : MonoBehaviour {
 	void createLights () {
 		for (int x = -20; x <= 20; x += 10) {
 			for (int z = -30; z <= 30; z += 6) {
-				Instantiate (spotLight, new Vector3 (x, 15, z), spotLight.transform.rotation);
+				Instantiate (spotLight, new Vector3 (x, 3, z), spotLight.transform.rotation);
 			}
 		}
 

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class GameStates : MonoBehaviour {
@@ -6,31 +7,35 @@ public class GameStates : MonoBehaviour {
 	public static bool partyLights = false;
 	public static float AIspeed = 0;
 	public static float AIbounceforce =  0;
-
-	public void togglePartyLights () {
-		partyLights = !partyLights;
-		Debug.Log ("party lights is set to " + partyLights);
-	}
+	public static string characterSelection = "";
 
 	public void easyAI () {
-		AIspeed = 30;
-		AIbounceforce = 30;
+		AIspeed = 40;
+		AIbounceforce = 40;
 	}
 
 	public void mediumAI () {
-		AIspeed = 45;
-		AIbounceforce = 30;
+		AIspeed = 50;
+		AIbounceforce = 45;
 	}
 
 	public void hardAI () {
-		AIspeed = 60;
-		AIbounceforce = 35;
+		AIspeed = 65;
+		AIbounceforce = 50;
 	}
 
 	public void insaneAI () {
-		AIspeed = 70;
-		AIbounceforce = 40;
+		AIspeed = 75;
+		AIbounceforce = 50;
 		//Do some super cool AI algorithm 
 		//to be implemented
+	}
+
+	public void timeWarper () {
+		characterSelection = "Time Warper";
+	}
+
+	public void cloner () {
+		characterSelection = "Cloner";
 	}
 }
