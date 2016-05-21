@@ -4,7 +4,7 @@ using System.Collections;
 public class AIPaddle : MonoBehaviour {
 	public AudioClip hitSound;
 	//Speed of AI paddle when returning to position
-	public float speed ;
+	public float speed;
 	//destination point
 	private Vector3 endPoint;
 	//Bounce force for puck
@@ -29,7 +29,7 @@ public class AIPaddle : MonoBehaviour {
 	}
 
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		float translation = speed * Time.deltaTime;
 
 		if (targ.transform.position.z < 0) {//if the puck is on the other side

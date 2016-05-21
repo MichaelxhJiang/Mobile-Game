@@ -26,7 +26,7 @@ public class Score : MonoBehaviour {
 	}
 	//Count down starts coroutine which invokes the waitForSeconds method
 	void CountDown () {
-		AI.GetComponent<AIPaddle> ().enabled = false;
+		AI.GetComponent<newAIPaddle> ().enabled = false;
 		player.GetComponent<PlayerPaddleController> ().enabled = false;
 		StartCoroutine(waitForSeconds());
 
@@ -58,7 +58,7 @@ public class Score : MonoBehaviour {
 			yield return new WaitForSeconds (1);
 			timer = i * 1.0;
 		}
-		AI.GetComponent<AIPaddle> ().enabled = true;
+		AI.GetComponent<newAIPaddle> ().enabled = true;
 		player.GetComponent<PlayerPaddleController> ().enabled = true;
 	}
 }
