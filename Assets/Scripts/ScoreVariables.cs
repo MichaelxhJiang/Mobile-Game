@@ -8,7 +8,7 @@ public class ScoreVariables : MonoBehaviour {
 	private int AIScore = 0;
 	private int nameToUse = 0;
 
-	private string[] nameArray = new string[]{"Bill","Yonglin","Michael","Jacob","Tyler","Emma","Olivia","Chloe"};
+	private string[] nameArray = new string[]{"Michael","Bill","Yonglin","Jacob","Tyler","Emma","Olivia","Chloe"};
 
 	void Start(){
 		nameToUse = rand.Next (0, nameArray.Length);

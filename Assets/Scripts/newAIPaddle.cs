@@ -10,12 +10,13 @@ public class newAIPaddle : MonoBehaviour {
 	//Bounce force for puck
 	private float bounceForce;
 	//The puck game object
-	public GameObject targ;
+	//public GameObject targ; DO YOU EVEN NEED THIS SH*T??????
 	public Transform targTransform;
 	private float targRadius = 2f;
 	//This game object
 	public Transform thisTransform;
 	private float thisRadius;
+	private PowerUp powerUp;
 
 	private AudioSource source;
 	private float volHigh = 1f;
@@ -28,9 +29,10 @@ public class newAIPaddle : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		speed = 40;
-		bounceForce = 70;
+		speed = GameStates.AIspeed;
+		bounceForce = GameStates.AIbounceforce;
 		thisRadius = thisTransform.localScale.z * GetComponent<CapsuleCollider> ().radius;
+		powerUp = GameObject.FindGameObjectWithTag ("Player").GetComponent<PowerUp> ();
 	}
 	
 	// Update is called once per frame
@@ -60,7 +62,34 @@ public class newAIPaddle : MonoBehaviour {
 		} else if (pos == "PuckBehind") {
 			thisTransform.position = Vector3.MoveTowards (thisTransform.position, new Vector3 (targTransform.position.x / 2, targTransform.position.y, targTransform.position.z + (targRadius * 8)), step);
 		}
+		//if more than one puck
+		if (powerUp.cloned) {
+			findClosestPuck ();
+		} else {
+			//targTransform = GameObject.FindGameObjectWithTag ("Puck").transform;
+			//Debug.Log ("reset puck target");
+		}
+
 		boundary ();
+	}
+
+	public void resetPuckTarget () {
+		//reset targTransform to original puck 
+		targTransform = GameObject.FindGameObjectWithTag ("Puck").transform;
+	}
+
+	//only run this if multiple pucks have been instantiated
+	public void findClosestPuck () {
+		GameObject[] pucks = GameObject.FindGameObjectsWithTag ("Puck");
+		GameObject closestPuck = pucks [0];
+		foreach (GameObject puck in pucks) {
+			if (puck.transform.position.z > closestPuck.transform.position.z) {
+				closestPuck = puck;
+			}
+		}
+
+		//set target puck to be closest puck to AI net
+		targTransform = closestPuck.transform;
 	}
 
 	void boundary(){
@@ -90,20 +119,22 @@ public class newAIPaddle : MonoBehaviour {
 	}
 		
 	string getPuckAndPaddlePosition(){
+
 		//puck is on the other side
 		if (stop) {
 			StartCoroutine (Go (0.1f));
 			return null;
-		}
+		} 
 		if (targTransform.position.z + targRadius < 0)
-			return "OtherSide";
+				return "OtherSide";
 		//Puck is infront of paddle
 		else if (targTransform.position.z < thisTransform.position.z)
-			return "PuckInFront";
+				return "PuckInFront";
 		//Puck is behind paddle
 		else
 			return "PuckBehind";
-		return null;
+		
+
 	}
 
 	void OnCollisionEnter(Collision hit) {
@@ -112,7 +143,7 @@ public class newAIPaddle : MonoBehaviour {
 			source.PlayOneShot(hitSound,vol);
 			hit.rigidbody.AddForceAtPosition(-1 * hit.contacts [0].normal * bounceForce, hit.contacts[0].normal, ForceMode.Impulse);
 			stop = true;
-			Debug.Log ("transform" + thisTransform.position.x + " " + thisTransform.position.z);
+			//Debug.Log ("transform" + thisTransform.position.x + " " + thisTransform.position.z); SO ANNOYING >:(((((((
 		}
 	}
 

@@ -65,10 +65,14 @@
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerPaddleController.cs" />
      <Compile Include="Assets\Scripts\PowerUp.cs" />
+     <Compile Include="Assets\Scripts\PuckScore.cs" />
      <Compile Include="Assets\Scripts\ScoreAndSetup.cs" />
      <Compile Include="Assets\Scripts\ScoreVariables.cs" />
      <Compile Include="Assets\Scripts\WallPhysics.cs" />
      <Compile Include="Assets\Scripts\newAIPaddle.cs" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
