@@ -18,6 +18,9 @@ public class newAIPaddle : MonoBehaviour {
 	private float thisRadius;
 	private PowerUp powerUp;
 
+	//used to track which puck AI is following
+	private bool followingClone;
+
 	private AudioSource source;
 	private float volHigh = 1f;
 	private float volLow = .5f;
@@ -33,6 +36,7 @@ public class newAIPaddle : MonoBehaviour {
 		bounceForce = GameStates.AIbounceforce;
 		thisRadius = thisTransform.localScale.z * GetComponent<CapsuleCollider> ().radius;
 		powerUp = GameObject.FindGameObjectWithTag ("Player").GetComponent<PowerUp> ();
+		followingClone = false;
 	}
 	
 	// Update is called once per frame
@@ -90,6 +94,7 @@ public class newAIPaddle : MonoBehaviour {
 
 		//set target puck to be closest puck to AI net
 		targTransform = closestPuck.transform;
+		followingClone = true;
 	}
 
 	void boundary(){
@@ -119,12 +124,16 @@ public class newAIPaddle : MonoBehaviour {
 	}
 		
 	string getPuckAndPaddlePosition(){
-
+		
 		//puck is on the other side
 		if (stop) {
 			StartCoroutine (Go (0.1f));
 			return null;
 		} 
+		if (!powerUp.cloned && followingClone) {
+			followingClone = false;
+			targTransform = GameObject.FindGameObjectWithTag ("Puck").transform;
+		}
 		if (targTransform.position.z + targRadius < 0)
 				return "OtherSide";
 		//Puck is infront of paddle
@@ -133,8 +142,6 @@ public class newAIPaddle : MonoBehaviour {
 		//Puck is behind paddle
 		else
 			return "PuckBehind";
-		
-
 	}
 
 	void OnCollisionEnter(Collision hit) {

@@ -26,7 +26,7 @@ public class PowerUp : MonoBehaviour {
 
 	void OnGUI(){
 		GUI.skin.box.fontSize = Screen.height/30;
-		if (!cloned) {
+		if (!cloned && !warped) {
 			if (GUI.Button (new Rect (0, Screen.height / 2.5f, Screen.width / 6, Screen.height / 8), powerUpName)) {
 				activatePowerUp ();
 			}
@@ -36,13 +36,13 @@ public class PowerUp : MonoBehaviour {
 	private void activatePowerUp () {
 		if (powerUpName.Equals ("CLONE")) {
 			for (int i = 0; i < 3; i++) {
-				clonedPucks [i] = (GameObject)Instantiate (puck, new Vector3 (gameObject.transform.position.x, 0.5f, 
-					gameObject.transform.position.z + 1.0f), puck.transform.rotation);
+				clonedPucks [i] = (GameObject)Instantiate (puck, new Vector3 (gameObject.transform.position.x - 3.0f + i * 3.0f, 0.5f, 
+					gameObject.transform.position.z + 4.0f), puck.transform.rotation);
 			}
 
-			clonedPucks [0].GetComponent<Rigidbody> ().AddForce (new Vector3 (1.0f, 0.0f, 1.0f) * 40);
-			clonedPucks [1].GetComponent<Rigidbody> ().AddForce (new Vector3 (0.0f, 0.0f, 1.0f) * 40);
-			clonedPucks [2].GetComponent<Rigidbody> ().AddForce (new Vector3 (-1.0f, 0.0f, 1.0f) * 40);
+			clonedPucks [0].GetComponent<Rigidbody> ().AddForce (new Vector3 (1.0f, 0.0f, 1.0f) * 40 * Time.deltaTime);
+			clonedPucks [1].GetComponent<Rigidbody> ().AddForce (new Vector3 (0.0f, 0.0f, 1.0f) * 40 * Time.deltaTime);
+			clonedPucks [2].GetComponent<Rigidbody> ().AddForce (new Vector3 (-1.0f, 0.0f, 1.0f) * 40 * Time.deltaTime);
 			GameObject ai = GameObject.FindGameObjectWithTag ("AI");
 
 			ai.GetComponent<newAIPaddle> ().findClosestPuck ();
@@ -55,15 +55,19 @@ public class PowerUp : MonoBehaviour {
 		}
 	}
 
+	public void destroyClonedPucks () {
+		foreach (GameObject clone in clonedPucks) {
+			Destroy (clone);
+		}
+	}
+
 	IEnumerator powerUpDuration (float waitTime) {
 		yield return new WaitForSeconds (waitTime);
 		newAIPaddle ai = GameObject.FindGameObjectWithTag ("AI").GetComponent<newAIPaddle>();
 		if (cloned) {
 			ai.resetPuckTarget ();
 			cloned = false;
-			foreach (GameObject clone in clonedPucks) {
-				Destroy (clone);
-			}
+			destroyClonedPucks ();
 			Debug.Log ("destroyed clones");
 		} else if (warped) {
 			warped = false;

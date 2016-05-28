@@ -32,12 +32,18 @@ public class ScoreAndSetup : MonoBehaviour {
 
 	//Resets the positions of game objects
 	public void resetPositions() {
+		if (player.GetComponent<PowerUp> ().cloned) {
+			player.GetComponent<PowerUp> ().destroyClonedPucks ();
+		}
+
 		AI.GetComponent<newAIPaddle> ().enabled = false;
 		player.GetComponent<PlayerPaddleController> ().enabled = false;
+		player.GetComponent<PowerUp> ().enabled = false;
 		rb.transform.position = new Vector3 (0f, 0.5f, 0f);
 		rb.velocity = Vector3.zero;
 		AI.transform.position = new Vector3 (0, 1, 30);
 		player.transform.position = new Vector3 (0, 1, -30);
+
 		StartCoroutine(waitForSeconds());
 	}
 
@@ -51,6 +57,7 @@ public class ScoreAndSetup : MonoBehaviour {
 		}
 		AI.GetComponent<newAIPaddle> ().enabled = true;
 		player.GetComponent<PlayerPaddleController> ().enabled = true;
+		player.GetComponent<PowerUp> ().enabled = true;
 	}
 }
 

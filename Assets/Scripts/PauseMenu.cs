@@ -7,15 +7,17 @@ public class PauseMenu : MonoBehaviour {
 
 	void OnGUI(){
 		GUI.skin.box.fontSize = Screen.height/30;
+		GUIStyle textFont = new GUIStyle ();
+
 		if (!paused) {
-			if (GUI.Button (new Rect (0 + Screen.width / 3, 0, Screen.width / 3, Screen.height / 20), "Pause")) {
+			if (GUI.Button (new Rect (0 + Screen.width / 4, 0, Screen.width / 2, Screen.height / 10), "Pause")) {
 				PauseGame ();
 			}
 		} else {
-			if (GUI.Button (new Rect (0 + Screen.width / 3, 0, Screen.width / 3, Screen.height / 20), "Pause")) {
+			if (GUI.Button (new Rect (0 + Screen.width / 4, 0, Screen.width / 2, Screen.height / 10), "Resume")) {
 				PauseGame ();
 			}
-			if (GUI.Button (new Rect (0 + Screen.width / 6, 0 + Screen.width / 6, Screen.width / 1.5f, Screen.height / 1.5f), "Back to main menu")) {
+			if (GUI.Button (new Rect (0 + Screen.width / 4, Screen.height / 3, Screen.width / 2, Screen.height / 10), "Main menu")) {
 				PauseGame ();
 				SceneManager.LoadScene (0); 
 			}

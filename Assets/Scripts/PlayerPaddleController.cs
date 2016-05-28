@@ -56,7 +56,7 @@ public class PlayerPaddleController : MonoBehaviour {
 			//Check if the ray hits any collider
 			if (Physics.Raycast (ray, out hit)) {
 				//set a flag to indicate to move the gameobject
-				if (hit.point.x > -25.0f && hit.point.x < 25.0f) {
+				if (hit.point.x > -24.0f && hit.point.x < 24.0f) {
 					flag = true;
 					//save the click / tap position
 					endPoint = hit.point;
