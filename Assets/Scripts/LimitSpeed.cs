@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LimitSpeed : MonoBehaviour {
 	//test
-	public float speed;
+	private float speed;
 	Vector3 lastPosition = Vector3.zero;
 	public float maxSpeed = 5f;//Replace with your max speed
 

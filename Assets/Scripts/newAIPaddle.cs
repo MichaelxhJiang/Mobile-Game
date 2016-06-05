@@ -145,7 +145,7 @@ public class newAIPaddle : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision hit) {
-		if (hit.gameObject.tag == "Puck") {
+		if (hit.collider.tag == "Puck") {
 			float vol = Random.Range (volLow, volHigh);
 			source.PlayOneShot(hitSound,vol);
 			hit.rigidbody.AddForceAtPosition(-1 * hit.contacts [0].normal * bounceForce, hit.contacts[0].normal, ForceMode.Impulse);

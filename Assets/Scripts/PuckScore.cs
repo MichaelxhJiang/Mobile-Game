@@ -18,6 +18,8 @@ public class PuckScore : MonoBehaviour {
 		} else if (hit.gameObject.tag == "AI Net") {
 			sv.increasePlayerScore ();
 			sas.resetPositions ();
+		} else if (hit.gameObject.tag == "Wall") {
+			GetComponent<EllipsoidParticleEmitter> ().Emit();
 		}
 	}
 }

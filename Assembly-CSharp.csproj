@@ -45,12 +45,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\PowerUp\Scripts\CustomizablePowerUp.cs" />
-     <Compile Include="Assets\PowerUp\Scripts\PowerUpManager.cs" />
-     <Compile Include="Assets\PowerUp\Scripts\PowerUpRotation.cs" />
-     <Compile Include="Assets\PowerUp\Scripts\ScaleParticles.cs" />
-     <Compile Include="Assets\PowerUp\Scripts\TakeablePowerUp.cs" />
-     <Compile Include="Assets\PowerUp\Scripts\Utility\Singleton.cs" />
+     <Compile Include="Assets\PowerUp From Asset Store\Scripts\CustomizablePowerUp.cs" />
+     <Compile Include="Assets\PowerUp From Asset Store\Scripts\PowerUpManager.cs" />
+     <Compile Include="Assets\PowerUp From Asset Store\Scripts\PowerUpRotation.cs" />
+     <Compile Include="Assets\PowerUp From Asset Store\Scripts\ScaleParticles.cs" />
+     <Compile Include="Assets\PowerUp From Asset Store\Scripts\TakeablePowerUp.cs" />
+     <Compile Include="Assets\PowerUp From Asset Store\Scripts\Utility\Singleton.cs" />
      <Compile Include="Assets\Scripts\2 player scene\Better2playercontroller.cs" />
      <Compile Include="Assets\Scripts\2 player scene\HittingPuck.cs" />
      <Compile Include="Assets\Scripts\2 player scene\Player1.cs" />
@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\PlayerPaddleController.cs" />
      <Compile Include="Assets\Scripts\PowerUp.cs" />
+     <Compile Include="Assets\Scripts\PuckParticleEffect.cs" />
      <Compile Include="Assets\Scripts\PuckScore.cs" />
      <Compile Include="Assets\Scripts\ScoreAndSetup.cs" />
      <Compile Include="Assets\Scripts\ScoreVariables.cs" />
