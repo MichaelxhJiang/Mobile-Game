@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerPaddleController : MonoBehaviour {
 	//flag to check if the user has tapped / clicked. 
 	//Set to true on click. Reset to false on reaching destination
-	private bool flag = false;
+	public bool flag = false;
 	//destination point
 	private Vector3 endPoint;
 	//alter this to change the speed of the movement of player / gameobject
@@ -56,7 +56,7 @@ public class PlayerPaddleController : MonoBehaviour {
 			//Check if the ray hits any collider
 			if (Physics.Raycast (ray, out hit)) {
 				//set a flag to indicate to move the gameobject
-				if (hit.point.x > -24.0f && hit.point.x < 24.0f) {
+				if (hit.point.x > -23.0f && hit.point.x < 23.0f && hit.point.z > -39) {
 					flag = true;
 					//save the click / tap position
 					endPoint = hit.point;
@@ -99,14 +99,19 @@ public class PlayerPaddleController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision hit) {
-		if (hit.gameObject.tag == "Puck" && speed > 0.7) {
-			hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * (speed * bounceForce), hit.contacts [0].normal, ForceMode.Impulse);
-			float vol = Random.Range (volLow, volHigh);
-			source.PlayOneShot(hitSound,vol);
-		} else {
-			hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
+		if (hit.gameObject.tag == "Puck") {
+			if (speed > 0.7) {
+				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * (speed * bounceForce), hit.contacts [0].normal, ForceMode.Impulse);
+				float vol = Random.Range (volLow, volHigh);
+				source.PlayOneShot(hitSound,vol);
+			} else {
+				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
+			}
+			//gameObject.GetComponent<PowerUp> ().fillUpPowerBar ();
 		}
 	}
+
+
 
 	void OnCollisionStay(Collision hit) {
 		

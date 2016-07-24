@@ -32,11 +32,14 @@ public class newAIPaddle : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		speed = GameStates.AIspeed;
-		bounceForce = GameStates.AIbounceforce;
+		//speed = GameStates.AIspeed;
+		//bounceForce = GameStates.AIbounceforce;
+		speed = 20;
+		bounceForce = 90;
 		thisRadius = thisTransform.localScale.z * GetComponent<CapsuleCollider> ().radius;
 		powerUp = GameObject.FindGameObjectWithTag ("Player").GetComponent<PowerUp> ();
 		followingClone = false;
+		resetPuckTarget ();
 	}
 	
 	// Update is called once per frame
@@ -45,7 +48,7 @@ public class newAIPaddle : MonoBehaviour {
 		string pos = getPuckAndPaddlePosition ();
 		float slope = getSlope (targTransform);
 		float point = targTransform.position.z + 6;
-		if (pos == "OtherSide")
+		if (pos == "OtherSide" || pos == null)
 			thisTransform.position = Vector3.MoveTowards (thisTransform.position, new Vector3 (Mathf.Clamp (targTransform.position.x, -6.0f, 6.0f), thisTransform.position.y, 30), step);
 		else if (pos == "PuckInFront") {
 			float dis = Mathf.Sqrt (Mathf.Abs((thisTransform.position.x - targTransform.position.x) + (thisTransform.position.z - targTransform.position.z)));
@@ -127,7 +130,7 @@ public class newAIPaddle : MonoBehaviour {
 		
 		//puck is on the other side
 		if (stop) {
-			StartCoroutine (Go (0.1f));
+			StartCoroutine (Go (0.5f));
 			return null;
 		} 
 		if (!powerUp.cloned && followingClone) {

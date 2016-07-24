@@ -4,20 +4,22 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour {
 	public bool paused;
+	public GUISkin buttonSkin;
+	public Texture pauseImage;
+	public Texture resumeImage;
 
 	void OnGUI(){
-		GUI.skin.box.fontSize = Screen.height/30;
-		GUIStyle textFont = new GUIStyle ();
+		GUI.skin = buttonSkin;
 
 		if (!paused) {
-			if (GUI.Button (new Rect (0 + Screen.width / 4, 0, Screen.width / 2, Screen.height / 10), "Pause")) {
+			if (GUI.Button (new Rect (Screen.width - Screen.width / 6, 0, Screen.width / 6, Screen.height / 10), pauseImage)) {
 				PauseGame ();
 			}
 		} else {
-			if (GUI.Button (new Rect (0 + Screen.width / 4, 0, Screen.width / 2, Screen.height / 10), "Resume")) {
+			if (GUI.Button (new Rect (Screen.width / 8.0f, Screen.height / 3, Screen.width * 3 / 4 , Screen.height / 8), "Resume")) {
 				PauseGame ();
 			}
-			if (GUI.Button (new Rect (0 + Screen.width / 4, Screen.height / 3, Screen.width / 2, Screen.height / 10), "Main menu")) {
+			if (GUI.Button (new Rect (Screen.width / 8.0f, Screen.height / 3 + Screen.height / 8, Screen.width * 3 / 4, Screen.height / 8), "Main menu")) {
 				PauseGame ();
 				SceneManager.LoadScene (0); 
 			}

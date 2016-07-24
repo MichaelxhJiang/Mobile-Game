@@ -26,8 +26,10 @@ public class AIPaddle : MonoBehaviour {
 
 	void Start () {
 		hitPuck = false;
-		speed = GameStates.AIspeed;
-		bounceForce = GameStates.AIbounceforce;
+		//speed = GameStates.AIspeed;
+		speed = 70;
+		//bounceForce = GameStates.AIbounceforce;
+		bounceForce = 70;
 		targ = GameObject.Find ("Puck");
 	}
 
@@ -45,11 +47,12 @@ public class AIPaddle : MonoBehaviour {
 			transform.position = Vector3.MoveTowards (transform.position, new Vector3 (Mathf.Clamp(targ.transform.position.x, -5.0F, 5.0F), targ.transform.position.y, 30), translation);
 		} 
 
-	else if (hitPuck) {
+		if (hitPuck) {
 			//if we hit the puck away, wait
 			StartCoroutine (WaitToChasePuck (0.5f));
 		} else if (transform.position.z + (GetComponent<CapsuleCollider> ().radius * transform.localScale.x) > targ.transform.position.z + (targ.transform.localScale.z*1.5f)) {
 			float dis = Mathf.Sqrt (Mathf.Abs((transform.position.x - targ.transform.position.x) + (transform.position.z - targ.transform.position.z)));
+			Debug.Log ("Moving towards puck");
 			if (dis < 5) 
 				transform.position = Vector3.MoveTowards (transform.position, targ.transform.position, translation + ((5-dis)/10));
 			else
