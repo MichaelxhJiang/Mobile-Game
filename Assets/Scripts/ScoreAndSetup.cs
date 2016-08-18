@@ -15,12 +15,14 @@ public class ScoreAndSetup : MonoBehaviour {
 	public GUISkin boxSkin;
 
 	//Set up timer UI
+
 	void OnGUI(){
 		GUI.skin = boxSkin;
 		if (showTimer) {
 			GUI.Box(new Rect(Screen.width/2 - Screen.width / 4, Screen.height /2 - Screen.height / 8, Screen.width / 2, Screen.height / 4), ""+timer);
 		}
 	}
+
 
 	void Awake () {
 		//Get all the reference objects needed

@@ -13,9 +13,11 @@ public class PuckScore : MonoBehaviour {
 	//Check if the puck has hit a goal
 	void OnCollisionEnter (Collision hit) {
 		if (hit.gameObject.tag == "Player Net") {
+			hit.gameObject.GetComponent<ParticleSystem> ().Play ();
 			sv.increaseAIScore ();
 			sas.resetPositions ();
 		} else if (hit.gameObject.tag == "AI Net") {
+			hit.gameObject.GetComponent<ParticleSystem> ().Play ();
 			sv.increasePlayerScore ();
 			sas.resetPositions ();
 		} else if (hit.gameObject.tag == "Wall") {
