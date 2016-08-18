@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour {
 		GUI.skin = buttonSkin;
 
 		if (!paused) {
-			if (GUI.Button (new Rect (Screen.width - Screen.width / 6, 0, Screen.width / 6, Screen.height / 10), pauseImage)) {
+			if (GUI.Button (new Rect (Screen.width - Screen.width / 7, 0, Screen.width / 7, Screen.height / 10), pauseImage)) {
 				PauseGame ();
 			}
 		} else {
@@ -24,17 +24,21 @@ public class PauseMenu : MonoBehaviour {
 				SceneManager.LoadScene (0); 
 			}
 		}
-			
 	}
 
 	public void PauseGame () {
+		//Turn off lighting
+		GameObject light = GameObject.FindGameObjectWithTag ("Main Light");
+
 		paused = !paused;
 		if (paused) {
 			Time.timeScale = 0;
-			Debug.Log (Time.timeScale);
+			light.GetComponent<Light> ().enabled = false;
+			//Debug.Log (Time.timeScale);
 		} else {
 			Time.timeScale = 1;
-			Debug.Log (Time.timeScale);
+			light.GetComponent<Light> ().enabled = true;
+			//Debug.Log (Time.timeScale);
 		}
 	}
 

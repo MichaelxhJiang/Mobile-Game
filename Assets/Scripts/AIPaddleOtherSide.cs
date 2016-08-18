@@ -9,8 +9,6 @@ public class AIPaddleOtherSide : MonoBehaviour {
 	private Vector3 endPoint;
 	//Bounce force for puck
 	private float bounceForce;
-	//The puck game object
-	//public GameObject targ; DO YOU EVEN NEED THIS SH*T??????
 	public Transform targTransform;
 	private float targRadius = 2f;
 	//This game object
@@ -19,7 +17,7 @@ public class AIPaddleOtherSide : MonoBehaviour {
 	//private PowerUp powerUp;
 
 	//used to track which puck AI is following
-	private bool followingClone;
+	//private bool followingClone;
 
 	//private AudioSource source;
 	//private float volHigh = 1f;
@@ -36,7 +34,7 @@ public class AIPaddleOtherSide : MonoBehaviour {
 		bounceForce = 70;
 		thisRadius = thisTransform.localScale.z * GetComponent<CapsuleCollider> ().radius;
 		//powerUp = GameObject.FindGameObjectWithTag ("Player").GetComponent<PowerUp> ();
-		followingClone = false;
+		//followingClone = false;
 		resetPuckTarget ();
 	}
 
@@ -57,7 +55,7 @@ public class AIPaddleOtherSide : MonoBehaviour {
 			if (slope == 0)
 				thisTransform.position = Vector3.MoveTowards (thisTransform.position, targTransform.position, step);
 			else {
-				thisTransform.position = Vector3.MoveTowards (thisTransform.position, new Vector3 (x, targTransform.position.y, targTransform.position.z - 1.0f), step);
+				thisTransform.position = Vector3.MoveTowards (thisTransform.position, new Vector3 (targTransform.position.x, targTransform.position.y, targTransform.position.z - 1.0f), step);
 				if (thisTransform.position.x < x) {
 					thisTransform.position += Vector3.right * 0.5f;
 				} else {
@@ -95,10 +93,11 @@ public class AIPaddleOtherSide : MonoBehaviour {
 
 		//set target puck to be closest puck to AI net
 		targTransform = closestPuck.transform;
-		followingClone = true;
+		//followingClone = true;
 	}
 
 	void boundary(){
+		
 		if (thisTransform.position.x - thisRadius < -24)
 			thisTransform.position = new Vector3 (-24 + thisRadius, thisTransform.position.y, thisTransform.position.z);
 		if (thisTransform.position.x + thisRadius > 23)
@@ -151,6 +150,7 @@ public class AIPaddleOtherSide : MonoBehaviour {
 			//source.PlayOneShot(hitSound,vol);
 			hit.rigidbody.AddForceAtPosition(-1 * hit.contacts [0].normal * bounceForce, hit.contacts[0].normal, ForceMode.Impulse);
 			stop = true;
+			print ("hit");
 			//Debug.Log ("transform" + thisTransform.position.x + " " + thisTransform.position.z); SO ANNOYING >:(((((((
 		}
 	}

@@ -41,6 +41,11 @@ public class PlayerPaddleController : MonoBehaviour {
 		lastPosition = transform.position;
 		//check if the screen is touched / clicked   
 		if ((Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) || (Input.GetMouseButton (0))) {
+
+			//
+			// || (Input.GetMouseButton (0))
+			//
+
 			//declare a variable of RaycastHit struct
 			RaycastHit hit;
 			//Create a Ray on the tapped / clicked position
@@ -108,6 +113,7 @@ public class PlayerPaddleController : MonoBehaviour {
 				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
 			}
 			//gameObject.GetComponent<PowerUp> ().fillUpPowerBar ();
+			//Debug.Log ("glitch");
 		}
 	}
 

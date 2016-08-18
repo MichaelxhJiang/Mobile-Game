@@ -9,8 +9,6 @@ public class AIPaddleOtherOtherSide : MonoBehaviour {
 	private Vector3 endPoint;
 	//Bounce force for puck
 	private float bounceForce;
-	//The puck game object
-	//public GameObject targ; DO YOU EVEN NEED THIS SH*T??????
 	public Transform targTransform;
 	private float targRadius = 2f;
 	//This game object
@@ -19,7 +17,7 @@ public class AIPaddleOtherOtherSide : MonoBehaviour {
 	//private PowerUp powerUp;
 
 	//used to track which puck AI is following
-	private bool followingClone;
+	//private bool followingClone;
 
 	//private AudioSource source;
 	//private float volHigh = 1f;
@@ -38,7 +36,7 @@ public class AIPaddleOtherOtherSide : MonoBehaviour {
 		bounceForce = 90;
 		thisRadius = thisTransform.localScale.z * GetComponent<CapsuleCollider> ().radius;
 		//powerUp = GameObject.FindGameObjectWithTag ("Player").GetComponent<PowerUp> ();
-		followingClone = false;
+		//followingClone = false;
 		resetPuckTarget ();
 	}
 
@@ -97,7 +95,7 @@ public class AIPaddleOtherOtherSide : MonoBehaviour {
 
 		//set target puck to be closest puck to AI net
 		targTransform = closestPuck.transform;
-		followingClone = true;
+		//followingClone = true;
 	}
 
 	void boundary(){
