@@ -12,11 +12,12 @@ public class PowerUp : MonoBehaviour {
 
 	//For the power up bar
 	public float percentageBar;
-	public GameObject powerBarPrefab;
-	private GameObject powerBar;
+	public Texture2D barMask;
+	public Texture2D barFill;
+	public Texture2D powerUpLabel;
 	private bool playEffect;
 
-	public GUISkin buttonSkin;
+	public GUISkin powerUpSkin;
 
 	// Use this for initialization
 	void Start () {
@@ -32,15 +33,24 @@ public class PowerUp : MonoBehaviour {
 		} else if (character.Equals ("Cloner")) {
 			powerUpName = "CLONE";
 			clonedPucks = new GameObject[3];
+		} else {
+			powerUpName = "NONE";
 		}
-		powerBar = Instantiate (powerBarPrefab);
-		powerBar.GetComponent<GUIBarScript> ().SetNewValue (0);
-
-		InvokeRepeating ("fillUpPowerBar", 1.0f, 0.2f);
+		if (!powerUpName.Equals ("NONE")) {
+			InvokeRepeating ("fillUpPowerBar", 1.0f, 0.2f);
+		}
 	}
 
 	void OnGUI(){
-		GUI.skin = buttonSkin;
+		GUI.skin = powerUpSkin;
+
+		if (!powerUpName.Equals("NONE")) {
+			//Update bar
+			GUI.DrawTexture(new Rect(20, Screen.height * 10 / 11, Screen.width * 3 / 4, Screen.height / 11), barMask);
+			GUI.DrawTexture (new Rect(30, Screen.height * 10 / 11 + 10, (Screen.width * 3 / 4 - 20) * percentageBar, Screen.height / 11 - 20), barFill);
+			GUI.DrawTexture (new Rect(40, Screen.height * 10 / 11 + 20, (Screen.width * 3 / 4 - 30), Screen.height / 11 - 30), powerUpLabel);
+		}
+
 		if (!cloned && !warped && percentageBar >= 1) {
 			if (GUI.Button (new Rect (Screen.width - Screen.height / 8, Screen.height - Screen.height / 8, Screen.height / 8, Screen.height / 8), "")) {
 				activatePowerUp ();
@@ -61,9 +71,7 @@ public class PowerUp : MonoBehaviour {
 
 	public void fillUpPowerBar () {
 		if (percentageBar < 1) {
-			//print (percentageBar);
 			percentageBar += 0.01f;
-			powerBar.GetComponent<GUIBarScript> ().SetNewValue (percentageBar);
 		}
 	}
 
@@ -72,7 +80,7 @@ public class PowerUp : MonoBehaviour {
 			for (int i = 0; i < 3; i++) {
 				float x = gameObject.transform.position.x + i * 5.0f - 5.0f;
 				if (x > 23.8) {
-					x = 23;
+					x = 23;	
 				} else if ( x < -24) {
 					x = -23.5f;
 				}
@@ -80,9 +88,9 @@ public class PowerUp : MonoBehaviour {
 					gameObject.transform.position.z + 5.0f), puck.transform.rotation);
 			}
 
-			clonedPucks [0].GetComponent<Rigidbody> ().AddForce (new Vector3 (-50.0f, 0.0f, 100.0f) * 600 * Time.deltaTime, ForceMode.Impulse);
-			clonedPucks [1].GetComponent<Rigidbody> ().AddForce (new Vector3 (0.0f, 0.0f, 100.0f) * 600 * Time.deltaTime, ForceMode.Impulse);
-			clonedPucks [2].GetComponent<Rigidbody> ().AddForce (new Vector3 (50.0f, 0.0f, 100.0f) * 600 * Time.deltaTime, ForceMode.Impulse);
+			clonedPucks [0].GetComponent<Rigidbody> ().AddForce (new Vector3 (-50.0f, 0.0f, 100.0f), ForceMode.Impulse);
+			clonedPucks [1].GetComponent<Rigidbody> ().AddForce (new Vector3 (0.0f, 0.0f, 100.0f), ForceMode.Impulse);
+			clonedPucks [2].GetComponent<Rigidbody> ().AddForce (new Vector3 (50.0f, 0.0f, 100.0f), ForceMode.Impulse);
 			GameObject ai = GameObject.FindGameObjectWithTag ("AI");
 
 			ai.GetComponent<newAIPaddle> ().findClosestPuck ();
@@ -90,10 +98,10 @@ public class PowerUp : MonoBehaviour {
 			StartCoroutine (powerUpDuration (8));
 		} else if (powerUpName.Equals ("WARP TIME")) {
 			GameObject ai = GameObject.FindGameObjectWithTag ("AI");
-			ai.GetComponent<newAIPaddle> ().speed /= 3;
+			ai.GetComponent<newAIPaddle> ().speed /= 20;
 			ai.GetComponent<ParticleSystem> ().Play ();
 			warped = true;
-			StartCoroutine (powerUpDuration (8));
+			StartCoroutine (powerUpDuration (10));
 		}
 	}
 
@@ -104,6 +112,8 @@ public class PowerUp : MonoBehaviour {
 	}
 
 	public void forceStopPowerUp () {
+		GameObject powerUpEffect = GameObject.FindGameObjectWithTag ("PowerUp");
+		powerUpEffect.GetComponent<ParticleSystem> ().Stop ();
 		newAIPaddle ai = GameObject.FindGameObjectWithTag ("AI").GetComponent<newAIPaddle>();
 		if (cloned) {
 			ai.resetPuckTarget ();
@@ -113,7 +123,7 @@ public class PowerUp : MonoBehaviour {
 		} else if (warped) {
 			warped = false;
 
-			ai.speed *= 3;
+			ai.speed *= 5;
 			Debug.Log ("stopped particle system");
 			ai.GetComponent<ParticleSystem> ().Stop ();
 		}
@@ -130,8 +140,7 @@ public class PowerUp : MonoBehaviour {
 		} else if (warped) {
 			warped = false;
 
-			ai.speed *= 3;
-			Debug.Log ("stopped particle system");
+			ai.speed = GameStates.AIspeed;
 			ai.GetComponent<ParticleSystem> ().Stop ();
 		}
 	}

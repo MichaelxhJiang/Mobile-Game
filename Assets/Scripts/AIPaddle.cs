@@ -26,10 +26,10 @@ public class AIPaddle : MonoBehaviour {
 
 	void Start () {
 		hitPuck = false;
-		//speed = GameStates.AIspeed;
-		speed = 70;
-		//bounceForce = GameStates.AIbounceforce;
-		bounceForce = 70;
+		speed = GameStates.AIspeed;
+		//speed = 70;
+		bounceForce = GameStates.AIbounceforce;
+		//bounceForce = 70;
 		targ = GameObject.Find ("Puck");
 	}
 

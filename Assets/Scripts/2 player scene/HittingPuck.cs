@@ -4,7 +4,7 @@ using System.Collections;
 public class HittingPuck : MonoBehaviour {
 	public float speed = 0;
 	Vector3 lastPosition = Vector3.zero;
-	public float bounceForce = 40.0f;
+	public float bounceForce = 60.0f;
 
 	// Use this for initialization
 	void Start () {

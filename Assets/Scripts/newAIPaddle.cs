@@ -32,10 +32,11 @@ public class newAIPaddle : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
-		//speed = GameStates.AIspeed;
-		//bounceForce = GameStates.AIbounceforce;
-		speed = 20;
-		bounceForce = 90;
+		speed = GameStates.AIspeed;
+		bounceForce = GameStates.AIbounceforce;
+		print (bounceForce);
+		//speed = 20;
+		//bounceForce = 90;
 		thisRadius = thisTransform.localScale.z * GetComponent<CapsuleCollider> ().radius;
 		powerUp = GameObject.FindGameObjectWithTag ("Player").GetComponent<PowerUp> ();
 		followingClone = false;

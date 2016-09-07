@@ -8,11 +8,11 @@ public class PlayerPaddleController : MonoBehaviour {
 	//destination point
 	private Vector3 endPoint;
 	//alter this to change the speed of the movement of player / gameobject
-	public float duration = 0.6f;
+	private float duration = 0.2f;
 	//vertical position of the gameobject
 	private float yAxis;
 	//Bounce force for puck
-	public float bounceForce = 50.0f;
+	public float bounceForce = 65.0f;
 	//test
 	public float speed = 0;
 
@@ -41,6 +41,11 @@ public class PlayerPaddleController : MonoBehaviour {
 		lastPosition = transform.position;
 		//check if the screen is touched / clicked   
 		if ((Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) || (Input.GetMouseButton (0))) {
+
+			//
+			// || (Input.GetMouseButton (0))
+			//
+
 			//declare a variable of RaycastHit struct
 			RaycastHit hit;
 			//Create a Ray on the tapped / clicked position
@@ -107,14 +112,12 @@ public class PlayerPaddleController : MonoBehaviour {
 			} else {
 				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
 			}
-			//gameObject.GetComponent<PowerUp> ().fillUpPowerBar ();
 		}
 	}
 
 
 
 	void OnCollisionStay(Collision hit) {
-		
 		OnCollisionEnter (hit);
 	}
 		

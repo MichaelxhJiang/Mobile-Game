@@ -7,18 +7,13 @@ public class BGScroller : MonoBehaviour
 	public float tileSizeZ;
 	public GameObject otherBG;
 
-	private Vector3 startPosition;
-
-	void Start ()
-	{
-		startPosition = gameObject.GetComponent<Transform>().position;
-	}
-
 	void Update ()
 	{
 		transform.Translate (Vector3.forward * scrollSpeed * Time.deltaTime);
-		if (transform.position.z > 398) {
-			transform.position = new Vector3 (0, transform.position.y, -293);
+		if (transform.position.z > 510) {
+			transform.position = new Vector3 (0, transform.position.y - 1, -405);
+			//Overlap the other BG
+			otherBG.transform.position = new Vector3 (0, otherBG.transform.position.y + 1, otherBG.transform.position.z);
 		}
 	}
 }

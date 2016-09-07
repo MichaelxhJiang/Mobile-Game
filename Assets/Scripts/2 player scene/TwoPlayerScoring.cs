@@ -8,13 +8,16 @@ public class TwoPlayerScoring : MonoBehaviour {
 	public GameObject gm;
 	private TwoPlayerScoreVariables sv;
 	private Rigidbody rb;
-	public int countDown = 1;
+	public int countDown;
+	public GUISkin boxSkin;
 	private double timer;
+	private bool showTimer;
 
 	//Set up timer UI
 	void OnGUI(){
-		GUI.skin.box.fontSize = Screen.height/30;
-		GUI.Box(new Rect(Screen.width - Screen.width/3, 0, Screen.width/3, Screen.height/20), ""+timer);
+		GUI.skin = boxSkin;
+		if (showTimer)
+			GUI.Box(new Rect(Screen.width/2 - Screen.width / 4, Screen.height /2 - Screen.height / 8, Screen.width / 2, Screen.height / 4), ""+timer);
 	}
 
 	void Start () {
@@ -31,6 +34,7 @@ public class TwoPlayerScoring : MonoBehaviour {
 	//Count down starts coroutine which invokes the waitForSeconds method
 	void CountDown () {
 		gm.GetComponent<Better2playercontroller> ().enabled = false;
+		showTimer = true;
 		StartCoroutine(waitForSeconds());
 
 	}
@@ -46,12 +50,18 @@ public class TwoPlayerScoring : MonoBehaviour {
 
 	//Check if the puck has hit a goal
 	void OnCollisionEnter (Collision hit) {
-		if (hit.gameObject.tag == "Player 1 Net") {
+		if (hit.gameObject.tag == "Player Net") {
+			Debug.LogError ("score");
 			sv.increasePlayer2Score ();
+			hit.gameObject.GetComponent<ParticleSystem> ().Play ();
 			resetPositions ();
-		} else if (hit.gameObject.tag == "Player 2 Net") {
+		} else if (hit.gameObject.tag == "AI Net") {
+			Debug.LogError ("score");
 			sv.increasePlayer1Score ();
+			hit.gameObject.GetComponent<ParticleSystem> ().Play ();
 			resetPositions ();
+		} else if (hit.gameObject.tag == "Wall" || hit.gameObject.tag == "Player 1" || hit.gameObject.tag == "Player 2") {
+			GetComponent<EllipsoidParticleEmitter> ().Emit();
 		}
 	}
 
@@ -61,6 +71,7 @@ public class TwoPlayerScoring : MonoBehaviour {
 			yield return new WaitForSeconds (1);
 			timer = i * 1.0;
 		}
+		showTimer = false;
 		gm.GetComponent<Better2playercontroller> ().enabled = true;
 	}
 }

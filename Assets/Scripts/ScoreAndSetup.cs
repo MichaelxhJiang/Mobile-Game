@@ -15,6 +15,7 @@ public class ScoreAndSetup : MonoBehaviour {
 	public GUISkin boxSkin;
 
 	//Set up timer UI
+
 	void OnGUI(){
 		GUI.skin = boxSkin;
 		if (showTimer) {
@@ -22,9 +23,9 @@ public class ScoreAndSetup : MonoBehaviour {
 		}
 	}
 
+
 	void Awake () {
 		//Get all the reference objects needed
-
 		rb = GameObject.FindGameObjectWithTag("Puck").GetComponent<Rigidbody> ();
 		AI = GameObject.FindGameObjectWithTag ("AI");
 		player = GameObject.FindGameObjectWithTag ("Player");
@@ -38,23 +39,25 @@ public class ScoreAndSetup : MonoBehaviour {
 
 	//Resets the positions of game objects
 	public void resetPositions() {
-		showTimer = true;
-		rb.velocity = Vector3.zero;
-		rb.transform.position = new Vector3 (0f, 0.5f, 0f);
-		AI.transform.position = new Vector3 (0, 1, 30);
-		player.transform.position = new Vector3 (0, 1, -30);
-		if (player.GetComponent<PowerUp> ().cloned) {
-			player.GetComponent<PowerUp> ().destroyClonedPucks ();
-		}
-		AI.GetComponent<newAIPaddle> ().resetPuckTarget ();
-		AI.GetComponent<newAIPaddle> ().enabled = false;
-		player.GetComponent<PlayerPaddleController> ().enabled = false;
-		player.GetComponent<PowerUp> ().enabled = false;
-		player.GetComponent<PlayerPaddleController> ().flag = false;
-		player.GetComponent<PowerUp> ().forceStopPowerUp ();
-		player.GetComponent<PowerUp> ().percentageBar = 0;
+		if (!gameObject.GetComponent<ScoreVariables> ().gameEnd) {
+			showTimer = true;
+			rb.velocity = Vector3.zero;
+			rb.transform.position = new Vector3 (0f, 0.5f, 0f);
+			AI.transform.position = new Vector3 (0, 1, 30);
+			player.transform.position = new Vector3 (0, 1, -30);
+			if (player.GetComponent<PowerUp> ().cloned) {
+				player.GetComponent<PowerUp> ().destroyClonedPucks ();
+			}
+			AI.GetComponent<newAIPaddle> ().resetPuckTarget ();
+			AI.GetComponent<newAIPaddle> ().enabled = false;
+			player.GetComponent<PlayerPaddleController> ().enabled = false;
+			player.GetComponent<PowerUp> ().enabled = false;
+			player.GetComponent<PlayerPaddleController> ().flag = false;
+			player.GetComponent<PowerUp> ().forceStopPowerUp ();
+			player.GetComponent<PowerUp> ().percentageBar = 0;
 
-		StartCoroutine(waitForSeconds());
+			StartCoroutine (waitForSeconds ());
+		}
 	}
 
 
