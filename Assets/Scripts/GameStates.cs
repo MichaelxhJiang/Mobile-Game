@@ -10,23 +10,23 @@ public class GameStates : MonoBehaviour {
 	public static string characterSelection = "";
 
 	public void easyAI () {
-		AIspeed = 25;
-		AIbounceforce = 30;
+		AIspeed = 10;
+		AIbounceforce = 20;
 	}
 
 	public void mediumAI () {
-		AIspeed = 35;
-		AIbounceforce = 40;
+		AIspeed = 15;
+		AIbounceforce = 30;
 	}
 
 	public void hardAI () {
-		AIspeed = 50;
-		AIbounceforce = 50;
+		AIspeed = 25;
+		AIbounceforce = 40;
 	}
 
 	public void insaneAI () {
-		AIspeed = 75;
-		AIbounceforce = 50;
+		AIspeed = 50;
+		AIbounceforce = 55;
 	}
 
 	public void timeWarper () {

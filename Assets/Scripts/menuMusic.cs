@@ -9,7 +9,7 @@ public class menuMusic : MonoBehaviour {
 	void Awake()
 	{
 		if (!AudioBegin && GameStates.toggleMusic == true) {
-			
+			print ("wtf");
 			GetComponent<AudioSource>().Play ();
 			DontDestroyOnLoad (gameObject);
 			AudioBegin = true;
@@ -17,7 +17,8 @@ public class menuMusic : MonoBehaviour {
 		} 
 	}
 	void Update () {
-		if (SceneManager.GetActiveScene ().name == "main" || SceneManager.GetActiveScene ().name == "2 player") {
+		if ((SceneManager.GetActiveScene ().name == "main" || SceneManager.GetActiveScene ().name == "2 player") && playing == true) {
+			print ("glitch");
 			GetComponent<AudioSource> ().Stop ();
 			AudioBegin = false;
 			playing = false;
@@ -28,7 +29,8 @@ public class menuMusic : MonoBehaviour {
 			GetComponent<AudioSource> ().Stop ();
 			playing = false;
 			AudioBegin = false;
-		} else if (GameStates.toggleMusic && playing == false) {
+		} else if (GameStates.toggleMusic && playing == false && (SceneManager.GetActiveScene ().name != "main" && SceneManager.GetActiveScene ().name != "2 player")) {
+			print ("glightsdlkfjlskdfj");
 			GetComponent<AudioSource> ().Play ();
 			playing = true;
 			AudioBegin = true;

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class ScoreVariables : MonoBehaviour {
 	
@@ -95,6 +96,10 @@ public class ScoreVariables : MonoBehaviour {
 			GUI.Label (new Rect (Screen.width / 2 - Screen.width / 4, Screen.height / 2 - Screen.height / 8, Screen.width / 2, Screen.height / 4), nameToUse + " SCORE: " + AIScore, scoreStyle);
 
 			if (GUI.Button (new Rect (Screen.width / 8.0f, Screen.height * 3 / 4 + Screen.height / 8, Screen.width * 3 / 4, Screen.height / 8), "Main menu", mainMenuStyle)) {
+				if (Advertisement.IsReady())
+				{
+					Advertisement.Show();
+				}
 				SceneManager.LoadScene (0); 
 			}
 		} else {

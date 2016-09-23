@@ -40,9 +40,28 @@ public class ScoreAndSetup : MonoBehaviour {
 	//Resets the positions of game objects
 	public void resetPositions() {
 		if (!gameObject.GetComponent<ScoreVariables> ().gameEnd) {
+			StartCoroutine (testPause ());
+			GameObject puck = GameObject.FindWithTag ("Puck");
+			puck.SetActive (false);
+
+			puck.GetComponent<LimitSpeed> ().enabled = false;
 			showTimer = true;
 			rb.velocity = Vector3.zero;
+			rb.angularVelocity = Vector3.zero;
+			rb.velocity = Vector3.ClampMagnitude(rb.velocity, 0.0f);
 			rb.transform.position = new Vector3 (0f, 0.5f, 0f);
+			puck.transform.position = new Vector3 (0f, 0.5f, 0f);
+
+			puck.SetActive (true);
+
+			puck.GetComponent<LimitSpeed> ().enabled = false;
+			showTimer = true;
+			rb.velocity = Vector3.zero;
+			rb.angularVelocity = Vector3.zero;
+			rb.velocity = Vector3.ClampMagnitude(rb.velocity, 0.0f);
+			rb.transform.position = new Vector3 (0f, 0.5f, 0f);
+			puck.transform.position = new Vector3 (0f, 0.5f, 0f);
+
 			AI.transform.position = new Vector3 (0, 1, 30);
 			player.transform.position = new Vector3 (0, 1, -30);
 			if (player.GetComponent<PowerUp> ().cloned) {
@@ -60,8 +79,6 @@ public class ScoreAndSetup : MonoBehaviour {
 		}
 	}
 
-
-
 	//Starts a countdown before the game begins
 	IEnumerator waitForSeconds () {
 		for (int i = countDown; i >=0; i--) {
@@ -76,6 +93,10 @@ public class ScoreAndSetup : MonoBehaviour {
 
 		//start clock on scoreboard
 		gameObject.GetComponent<ScoreVariables>().startClock ();
+	}
+
+	IEnumerator testPause() {
+		yield return new WaitForSeconds (1);
 	}
 }
 

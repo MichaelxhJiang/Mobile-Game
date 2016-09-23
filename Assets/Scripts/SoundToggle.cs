@@ -15,10 +15,8 @@ public class SoundToggle : MonoBehaviour {
 	public void toggleSound () {
 		if (gameObject.tag == "Sound FX Toggle") {
 			GameStates.toggleSoundFX = gameObject.GetComponent<Toggle> ().isOn;
-			print (GameStates.toggleSoundFX);
 		} else if (gameObject.tag == "Music Toggle") {
 			GameStates.toggleMusic = gameObject.GetComponent<Toggle> ().isOn;
-			print (GameStates.toggleMusic);
 		}
 	}
 }

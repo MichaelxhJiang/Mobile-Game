@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class TwoPlayerScoreVariables : MonoBehaviour {
 	private int playerScore = 0;
@@ -79,7 +80,11 @@ public class TwoPlayerScoreVariables : MonoBehaviour {
 
 				GUIUtility.RotateAroundPivot(180, new Vector2(Screen.width / 2, Screen.height / 2));
 			}
-			if (GUI.Button (new Rect (Screen.width * 3 / 8, Screen.height / 2 - Screen.height / 8 + Screen.height / 8, Screen.width  / 4, Screen.height / 4), "Main menu", mainMenuStyle)) {
+			if (GUI.Button (new Rect (Screen.width * 3 / 8, Screen.height / 3 + Screen.height / 8, Screen.width  / 4, Screen.height / 4), "Main menu", mainMenuStyle)) {
+				if (Advertisement.IsReady())
+				{
+					Advertisement.Show();
+				}
 				SceneManager.LoadScene (0); 
 			}
 		}

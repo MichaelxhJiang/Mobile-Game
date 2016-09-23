@@ -8,7 +8,7 @@ public class PlayerPaddleController : MonoBehaviour {
 	//destination point
 	private Vector3 endPoint;
 	//alter this to change the speed of the movement of player / gameobject
-	private float duration = 0.2f;
+	private float duration = 1.0f;
 	//vertical position of the gameobject
 	private float yAxis;
 	//Bounce force for puck
@@ -17,12 +17,7 @@ public class PlayerPaddleController : MonoBehaviour {
 	public float speed = 0;
 
 	public AudioClip hitSound;
-
 	private AudioSource source;
-
-	private float volHigh = 1f;
-
-	private float volLow = .5f;
 
 	Vector3 lastPosition = Vector3.zero;
 
@@ -41,11 +36,6 @@ public class PlayerPaddleController : MonoBehaviour {
 		lastPosition = transform.position;
 		//check if the screen is touched / clicked   
 		if ((Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) || (Input.GetMouseButton (0))) {
-
-			//
-			// || (Input.GetMouseButton (0))
-			//
-
 			//declare a variable of RaycastHit struct
 			RaycastHit hit;
 			//Create a Ray on the tapped / clicked position
@@ -107,15 +97,13 @@ public class PlayerPaddleController : MonoBehaviour {
 		if (hit.gameObject.tag == "Puck") {
 			if (speed > 0.7) {
 				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * (speed * bounceForce), hit.contacts [0].normal, ForceMode.Impulse);
-				float vol = Random.Range (volLow, volHigh);
-				source.PlayOneShot(hitSound,vol);
+				if (GameStates.toggleSoundFX)
+					source.PlayOneShot(hitSound, 0.7f);
 			} else {
 				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
 			}
 		}
 	}
-
-
 
 	void OnCollisionStay(Collision hit) {
 		OnCollisionEnter (hit);

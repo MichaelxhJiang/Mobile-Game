@@ -5,15 +5,12 @@ public class LimitSpeed : MonoBehaviour {
 	//test
 	private float speed;
 	Vector3 lastPosition = Vector3.zero;
-	public float maxSpeed = 5f;//Replace with your max speed
+	private float maxSpeed = 120.0f;//Replace with your max speed
 
 	void FixedUpdate()
 	{
-		speed = (transform.position - lastPosition).magnitude;
-		lastPosition = transform.position;
-		if(speed > maxSpeed)
-		{
-			GetComponent<Rigidbody>().velocity = GetComponent<Rigidbody>().velocity.normalized * maxSpeed;
+		if(gameObject.GetComponent<Rigidbody>().velocity.magnitude > maxSpeed){
+			gameObject.GetComponent<Rigidbody>().velocity = Vector3.ClampMagnitude(gameObject.GetComponent<Rigidbody>().velocity, maxSpeed);
 		}
 	}
 }

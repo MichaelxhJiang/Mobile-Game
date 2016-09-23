@@ -2,28 +2,25 @@
 using System.Collections;
 
 public class newAIPaddle : MonoBehaviour {
-	public AudioClip hitSound;
+	
 	//Speed of AI paddle when returning to position
 	public float speed;
 	//destination point
 	private Vector3 endPoint;
 	//Bounce force for puck
 	private float bounceForce;
-	//The puck game object
-	//public GameObject targ; DO YOU EVEN NEED THIS SH*T??????
+	//The puck game object transform
 	public Transform targTransform;
 	private float targRadius = 2f;
 	//This game object
 	public Transform thisTransform;
 	private float thisRadius;
 	private PowerUp powerUp;
-
 	//used to track which puck AI is following
 	private bool followingClone;
-
+	//Audio stuff
 	private AudioSource source;
-	private float volHigh = 1f;
-	private float volLow = .5f;
+	public AudioClip hitSound;
 
 	bool stop = false;
 
@@ -34,9 +31,6 @@ public class newAIPaddle : MonoBehaviour {
 	void Start () {
 		speed = GameStates.AIspeed;
 		bounceForce = GameStates.AIbounceforce;
-		print (bounceForce);
-		//speed = 20;
-		//bounceForce = 90;
 		thisRadius = thisTransform.localScale.z * GetComponent<CapsuleCollider> ().radius;
 		powerUp = GameObject.FindGameObjectWithTag ("Player").GetComponent<PowerUp> ();
 		followingClone = false;
@@ -150,11 +144,10 @@ public class newAIPaddle : MonoBehaviour {
 
 	void OnCollisionEnter(Collision hit) {
 		if (hit.collider.tag == "Puck") {
-			float vol = Random.Range (volLow, volHigh);
-			source.PlayOneShot(hitSound,vol);
+			if (GameStates.toggleSoundFX)
+				source.PlayOneShot(hitSound, 0.7f);
 			hit.rigidbody.AddForceAtPosition(-1 * hit.contacts [0].normal * bounceForce, hit.contacts[0].normal, ForceMode.Impulse);
 			stop = true;
-			//Debug.Log ("transform" + thisTransform.position.x + " " + thisTransform.position.z); SO ANNOYING >:(((((((
 		}
 	}
 

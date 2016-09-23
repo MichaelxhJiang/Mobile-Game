@@ -113,6 +113,7 @@ public class PowerUp : MonoBehaviour {
 
 	public void forceStopPowerUp () {
 		GameObject powerUpEffect = GameObject.FindGameObjectWithTag ("PowerUp");
+		playEffect = false;
 		powerUpEffect.GetComponent<ParticleSystem> ().Stop ();
 		newAIPaddle ai = GameObject.FindGameObjectWithTag ("AI").GetComponent<newAIPaddle>();
 		if (cloned) {
@@ -123,7 +124,7 @@ public class PowerUp : MonoBehaviour {
 		} else if (warped) {
 			warped = false;
 
-			ai.speed *= 5;
+			ai.speed = GameStates.AIspeed;
 			Debug.Log ("stopped particle system");
 			ai.GetComponent<ParticleSystem> ().Stop ();
 		}

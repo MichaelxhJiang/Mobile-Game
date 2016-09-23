@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.Advertisements;
 
 public class PauseMenu : MonoBehaviour {
 	public bool paused;
@@ -21,6 +22,10 @@ public class PauseMenu : MonoBehaviour {
 			}
 			if (GUI.Button (new Rect (Screen.width / 8.0f, Screen.height / 3 + Screen.height / 8, Screen.width * 3 / 4, Screen.height / 8), "Main menu")) {
 				PauseGame ();
+				if (Advertisement.IsReady())
+				{
+					Advertisement.Show();
+				}
 				SceneManager.LoadScene (0); 
 			}
 		}
