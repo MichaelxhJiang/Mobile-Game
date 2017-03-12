@@ -3,9 +3,9 @@ using System.Collections;
 
 public class LimitSpeed : MonoBehaviour {
 	//test
-	private float speed;
-	Vector3 lastPosition = Vector3.zero;
-	private float maxSpeed = 120.0f;//Replace with your max speed
+	//private float speed;
+	//Vector3 lastPosition = Vector3.zero;
+	private float maxSpeed = 80.0f;//Replace with your max speed
 
 	void FixedUpdate()
 	{

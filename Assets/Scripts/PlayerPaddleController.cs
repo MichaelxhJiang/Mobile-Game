@@ -8,18 +8,15 @@ public class PlayerPaddleController : MonoBehaviour {
 	//destination point
 	private Vector3 endPoint;
 	//alter this to change the speed of the movement of player / gameobject
-	private float duration = 1.0f;
+	private float duration = 1.5f;
 	//vertical position of the gameobject
 	private float yAxis;
 	//Bounce force for puck
 	public float bounceForce = 65.0f;
-	//test
-	public float speed = 0;
 
+	public bool playFX;
 	public AudioClip hitSound;
 	private AudioSource source;
-
-	Vector3 lastPosition = Vector3.zero;
 
 	void Awake(){
 		source = GetComponent<AudioSource> ();
@@ -28,12 +25,11 @@ public class PlayerPaddleController : MonoBehaviour {
 	void Start(){
 		//save the y axis value of gameobject
 		yAxis = gameObject.transform.position.y;
+		playFX = true;
 	}
 
 	// Update is called once per frame
 	void FixedUpdate () {
-		speed = (transform.position - lastPosition).magnitude;
-		lastPosition = transform.position;
 		//check if the screen is touched / clicked   
 		if ((Input.touchCount > 0 && Input.GetTouch (0).phase == TouchPhase.Began) || (Input.GetMouseButton (0))) {
 			//declare a variable of RaycastHit struct
@@ -63,7 +59,8 @@ public class PlayerPaddleController : MonoBehaviour {
 		//check if the flag for movement is true and the current gameobject position is not same as the clicked / tapped position
 		if(flag && !Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)){ //&& !(V3Equal(transform.position, endPoint))){
 			//move the gameobject to the desired position
-			gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, endPoint, 1/(duration*(Vector3.Distance(gameObject.transform.position, endPoint))));
+			//gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, endPoint, 1/(duration*(Vector3.Distance(gameObject.transform.position, endPoint))));
+			gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, endPoint, 100.0f);
 		}
 		//set the movement indicator flag to false if the endPoint and current gameobject position are equal
 		else if(flag && Mathf.Approximately(gameObject.transform.position.magnitude, endPoint.magnitude)) {
@@ -95,18 +92,26 @@ public class PlayerPaddleController : MonoBehaviour {
 
 	void OnCollisionEnter(Collision hit) {
 		if (hit.gameObject.tag == "Puck") {
-			if (speed > 0.7) {
-				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * (speed * bounceForce), hit.contacts [0].normal, ForceMode.Impulse);
-				if (GameStates.toggleSoundFX)
-					source.PlayOneShot(hitSound, 0.7f);
-			} else {
-				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed, hit.contacts [0].normal, ForceMode.Impulse);
+			//float speed = gameObject.GetComponent<Rigidbody> ().velocity.magnitude;
+			//if (speed > 0.4) {
+				hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * (bounceForce), hit.contacts [0].normal, ForceMode.Impulse);
+			if (GameStates.toggleSoundFX && playFX) {
+				source.PlayOneShot (hitSound, 0.7f);
+				playFX = false;
+				StartCoroutine (fxDelay (100));
 			}
+			//} else {
+			//	hit.rigidbody.AddForceAtPosition (-1 * hit.contacts [0].normal * speed * bounceForce, hit.contacts [0].normal, ForceMode.Impulse);
+			//}
 		}
 	}
 
 	void OnCollisionStay(Collision hit) {
 		OnCollisionEnter (hit);
 	}
-		
+
+	IEnumerator fxDelay (float time) {
+		yield return new WaitForSeconds (time);
+		playFX = true;
+	}
 }

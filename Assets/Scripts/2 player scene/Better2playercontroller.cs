@@ -5,6 +5,7 @@ using System;
 public class Better2playercontroller : MonoBehaviour {
 	public GameObject gamePaddle1;
 	public GameObject gamePaddle2;
+
 	// Use this for initialization
 	void Start () {
 		

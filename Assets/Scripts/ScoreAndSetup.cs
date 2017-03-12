@@ -40,10 +40,23 @@ public class ScoreAndSetup : MonoBehaviour {
 	//Resets the positions of game objects
 	public void resetPositions() {
 		if (!gameObject.GetComponent<ScoreVariables> ().gameEnd) {
-			StartCoroutine (testPause ());
+			AI.transform.position = new Vector3 (0, 1, 30);
+			player.transform.position = new Vector3 (0, 1, -30);
+			if (player.GetComponent<PowerUp> ().cloned) {
+				player.GetComponent<PowerUp> ().destroyClonedPucks ();
+			}
+			AI.GetComponent<newAIPaddle> ().resetPuckTarget ();
+			AI.GetComponent<newAIPaddle> ().enabled = false;
+			player.GetComponent<PlayerPaddleController> ().enabled = false;
+			player.GetComponent<PowerUp> ().enabled = false;
+			player.GetComponent<PlayerPaddleController> ().flag = false;
+			player.GetComponent<PowerUp> ().forceStopPowerUp ();
+			player.GetComponent<PowerUp> ().percentageBar = 0;
+
+
 			GameObject puck = GameObject.FindWithTag ("Puck");
 			puck.SetActive (false);
-
+			StartCoroutine (testPause ());
 			puck.GetComponent<LimitSpeed> ().enabled = false;
 			showTimer = true;
 			rb.velocity = Vector3.zero;
@@ -61,19 +74,6 @@ public class ScoreAndSetup : MonoBehaviour {
 			rb.velocity = Vector3.ClampMagnitude(rb.velocity, 0.0f);
 			rb.transform.position = new Vector3 (0f, 0.5f, 0f);
 			puck.transform.position = new Vector3 (0f, 0.5f, 0f);
-
-			AI.transform.position = new Vector3 (0, 1, 30);
-			player.transform.position = new Vector3 (0, 1, -30);
-			if (player.GetComponent<PowerUp> ().cloned) {
-				player.GetComponent<PowerUp> ().destroyClonedPucks ();
-			}
-			AI.GetComponent<newAIPaddle> ().resetPuckTarget ();
-			AI.GetComponent<newAIPaddle> ().enabled = false;
-			player.GetComponent<PlayerPaddleController> ().enabled = false;
-			player.GetComponent<PowerUp> ().enabled = false;
-			player.GetComponent<PlayerPaddleController> ().flag = false;
-			player.GetComponent<PowerUp> ().forceStopPowerUp ();
-			player.GetComponent<PowerUp> ().percentageBar = 0;
 
 			StartCoroutine (waitForSeconds ());
 		}

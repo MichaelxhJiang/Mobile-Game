@@ -108,6 +108,7 @@ public class PowerUp : MonoBehaviour {
 	public void destroyClonedPucks () {
 		foreach (GameObject clone in clonedPucks) {
 			Destroy (clone);
+
 		}
 	}
 
